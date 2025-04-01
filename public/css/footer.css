@@ -1,0 +1,32 @@
+footer {
+    position: fixed;
+    bottom: 0;
+    left: var(--menu-width);
+    width: calc(100% - var(--menu-width));
+    height: auto; /* Tinggi menyesuaikan konten */
+    padding: 15px; /* Tambahkan padding */
+    background: #333;
+    z-index: 999; /* z-index footer */
+    transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
+  }
+
+  .collapsed footer {
+    left: var(--collapsed-width);
+    width: calc(100% - var(--collapsed-width));
+  }
+
+  .footer-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 10px; /* Tambahkan padding */
+  }
+
+  .footer-wrapper p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #cecece;
+    white-space: nowrap; /* Mencegah teks terpotong */
+  }

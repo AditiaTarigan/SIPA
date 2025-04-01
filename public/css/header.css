@@ -1,0 +1,234 @@
+:root {
+    --menu-width: 300px;
+    --collapsed-width: 60px;
+  }
+
+  header {
+    position: fixed;
+    top: 0;
+    left: var(--menu-width);
+    width: calc(100% - var(--menu-width));
+    height: 60px;
+    background: #292929;
+    z-index: 998; /* z-index header */
+    transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
+  }
+
+  .collapsed header {
+    left: var(--collapsed-width);
+    width: calc(100% - var(--collapsed-width));
+  }
+
+  aside {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--menu-width);
+    height: 100vh;
+    background: #282c34;
+    z-index: 1000; /* Sidebar di bawah header */
+    transition: width 0.3s ease-in-out;
+  }
+
+  .nav-bar {
+    gap: 30px;
+    height: 100%;
+    width: 100%;
+    margin: auto;
+    display: grid;
+    padding: 0 15px;
+    max-width: 1200px;
+    align-items: center;
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .nav-bar a {
+    color: white;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .menu-icon {
+    font-size: 32px;
+    display: none;
+  }
+
+  .logo {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    width: fit-content;
+    white-space: nowrap;
+  }
+
+  .logo .icon {
+    font-size: 20px;
+    padding: 5px;
+    background: #25beb0;
+    border-radius: 5px;
+    margin-right: 15px;
+  }
+
+  .nav-link-list {
+    display: flex;
+    gap: 25px;
+    height: 100%;
+    font-size: 17px;
+  }
+
+  .item {
+    position: relative;
+  }
+
+  .item:hover>a,
+  .drop-down a:hover,
+  .drop-down a:hover .icon {
+    color: #25beb0;
+  }
+
+  .item::before {
+    content: '';
+    width: 100%;
+    position: absolute;
+    display: block;
+    transform: scaleX(0);
+    left: 0;
+    height: 3px;
+    transition: transform .3s;
+    bottom: 0;
+    background-color: #25beb0;
+    transform-origin: center;
+  }
+
+  .item:hover::before {
+    padding: 0 2px;
+    transform: scaleX(1);
+  }
+
+  .nav-link-list .icon {
+    vertical-align: middle;
+    margin-right: 4px;
+    font-size: 15px;
+  }
+
+  .has-drop-down>a::after {
+    content: "\ea4a";
+    font-family: 'boxicons';
+    font-size: 20px;
+    vertical-align: middle;
+  }
+
+  .drop-down {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    top: 60px;
+    display: grid;
+    gap: 30px 15px;
+    padding: 15px;
+    left: 0;
+    width: 550px;
+    transform: scaleY(0);
+    transition: transform .3s;
+    background-color: #292929;
+    border-radius: 0 0 5px 5px;
+    transform-origin: center top;
+    justify-content: space-between;
+    grid-template-columns: repeat(2, auto);
+  }
+
+  .has-drop-down:hover .drop-down {
+    visibility: visible;
+    opacity: 1;
+    transform: scaleY(1);
+  }
+
+  .drop-down a {
+    display: grid;
+    grid-template-areas: "icon name"
+      "icon addon";
+    align-items: center;
+    grid-template-columns: auto 1fr;
+    gap: 0px 10px;
+    overflow: hidden;
+  }
+
+  .drop-down .icon {
+    grid-area: icon;
+    font-size: 22px;
+    padding: 10px;
+    color: #c2c2c2;
+    border-radius: 5px;
+    background: #353535;
+  }
+
+  .addon {
+    color: #7e7e7e;
+    font-size: 13px;
+    line-height: 1.2;
+  }
+
+  .btns-wrapper {
+    display: flex;
+    gap: 15px;
+  }
+
+  .btns-wrapper a {
+    padding: 2px 15px;
+    border-radius: 5px;
+  }
+
+  .nav-login {
+    border: 1px solid #ffffff8a;
+    transition: background-color .2s;
+  }
+
+  .nav-login:hover {
+    color: black;
+    font-weight: 700;
+    background-color: white;
+  }
+
+  .nav-signup {
+    font-weight: 700;
+    letter-spacing: .5px;
+    background-color: #25beb0;
+    text-shadow: 1px 0px 2px #00000029;
+  }
+
+  .nav-signup:hover {
+    background-color: #12887e;
+  }
+
+  @media screen and (max-width:1100px) {
+    .nav-link-list {
+      display: none;
+    }
+
+    .menu-icon {
+      display: block;
+    }
+
+    .nav-bar {
+      gap: 10px;
+    }
+  }
+
+  @media screen and (max-width:450px) {
+    .btns-wrapper {
+      display: none;
+    }
+
+    .notification-icon {
+        font-size: 24px; /* Ukuran ikon */
+        color: white; /* Warna ikon */
+        cursor: pointer; /* Ubah kursor saat dihover */
+        position: relative; /* Untuk notifikasi badge */
+      }
+
+      .notification-icon:hover {
+        color: #25beb0; /* Warna saat dihover */
+      }
+  }
