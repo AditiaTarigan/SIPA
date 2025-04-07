@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('password', 255);
             $table->enum('role', ['mahasiswa', 'dosen', 'admin']);
             $table->timestamp('created_at')->nullable()->useCurrent();
+            $table->string('nim')->nullable()->unique(); // Buat unique jika NIM harus unik
+            $table->string('prodi')->nullable();
+            $table->string('tahun_angkatan')->nullable();
         });
     }
 

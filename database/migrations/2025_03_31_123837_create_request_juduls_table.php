@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Nama tabel jamak: request_juduls
-        Schema::create('request_juduls', function (Blueprint $table) {
+        // Nama tabel singel: request_judul
+        Schema::create('request_judul', function (Blueprint $table) {
             $table->id(); // Sesuai dengan INT NOT NULL AUTO_INCREMENT PRIMARY KEY
             // Foreign key ke tabel users (merujuk pada user mahasiswa)
             $table->foreignId('mahasiswa_id')
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('request_juduls');
+        Schema::dropIfExists('request_judul');
     }
 };

@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
-// use Illuminate\Support\Facades\Gate;
+// use Illuminate\Support\Facades\Gate; // Uncomment jika perlu Gate::define
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use App\Models\RequestJudul; // Import Model
+use App\Policies\RequestJudulPolicy; // Import Policy
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        //
+        // 'App\Models\Model' => 'App\Policies\ModelPolicy', // Format default
+        RequestJudul::class => RequestJudulPolicy::class,   // Tambahkan baris ini
     ];
 
     /**
@@ -21,6 +24,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $this->registerPolicies();
+
+        // Gate::define(...); // Jika Anda menggunakan Gate juga
     }
 }
