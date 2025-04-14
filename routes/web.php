@@ -49,7 +49,7 @@ Route::middleware(['auth'])->group(function () {
 
     // --- Mahasiswa Specific Routes (Example) ---
     // Consider adding role middleware here if needed: ->middleware('role:mahasiswa')
-    Route::get('/mahasiswa', [MahasiswaController::class,'index'])->name('mahasiswa.index');
+    Route::resource('mahasiswa', MahasiswaController::class);
 
     // --- Dosen Specific Routes (Example) ---
     // Consider adding role middleware here if needed: ->middleware('role:dosen')
