@@ -25,7 +25,7 @@
             <li><a href="#"><span class="icon fa fa-file-upload icon"></span><span class="item-name">Log Activity   </span></a><span class="tooltip">AktivitasKu</span></li>
             <li><a href="#"><span class="icon fa fa-user"></span><span class="item-name">Dokumen</span></a><span class="tooltip">Dokumen</span></li>
             <li><a href="#"><span class="icon fa fa-gear"></span><span class="item-name">CatatanBimbingan</span></a><span class="tooltip">CatatanBimbingan</span></li>
-            <li><a href="#"><span class="icon fa fa-comment-dots"></span><span class="item-name">ChatPA</span></a><span class="tooltip">ChatPA</span></li>
+            <li><a href="{{ route('mahasiswa.index') }}"><span class="icon fa fa-comment-dots"></span><span class="item-name">ChatPA</span></a><span class="tooltip">ChatPA</span></li>
             <li><a href="logout"><span class="icon fa fa-right-from-bracket"></span><span class="item-name">Logout</span></a><span class="tooltip">Logout</span></li>
         </ul>
     </aside>

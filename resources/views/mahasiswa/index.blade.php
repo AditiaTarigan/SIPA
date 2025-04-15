@@ -1,4 +1,6 @@
-@extends('layout.template')
+@extends('layouts.utama')
+
+@extends('layouts.template')
 
 @section('content')
         <!-- START DATA -->
