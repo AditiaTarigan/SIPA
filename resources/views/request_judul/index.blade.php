@@ -1,5 +1,7 @@
 {{-- resources/views/request_judul/index.blade.php --}}
 {{-- Extend layout utama kamu jika ada --}}
+<link href="{{ asset('css/custom-styles.css') }}" rel="stylesheet">
+
 @extends('layouts.app')
 
 {{-- @section('content') --}}

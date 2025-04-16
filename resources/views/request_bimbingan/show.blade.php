@@ -1,3 +1,5 @@
+<link href="{{ asset('css/reqbim.css') }}" rel="stylesheet">
+
 @extends('layouts.app')
 
 @section('title', 'Request Bimbingan Details')

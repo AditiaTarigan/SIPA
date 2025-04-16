@@ -1,3 +1,5 @@
+<link href="{{ asset('css/custom-styles.css') }}" rel="stylesheet">
+
 @extends('layouts.app')
 
 @section('title', 'Detail Request Judul')

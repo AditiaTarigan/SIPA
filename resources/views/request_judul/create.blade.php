@@ -1,4 +1,5 @@
 {{-- resources/views/request_judul/create.blade.php --}}
+<link href="{{ asset('css/custom-styles.css') }}" rel="stylesheet">
 
 @extends('layouts.app')
 
