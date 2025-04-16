@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.utama')
 
 @section('title', 'Edit Request Judul')
 
 @section('content')
-<div class="container">
+<div class="container" padding="10px">
     <h1>Edit Request Judul</h1>
 
     <div class="card">

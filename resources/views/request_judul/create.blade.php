@@ -1,6 +1,6 @@
 {{-- resources/views/request_judul/create.blade.php --}}
 
-@extends('layouts.app')
+@extends('layouts.utama')
 
  @section('content')
 <div class="container">

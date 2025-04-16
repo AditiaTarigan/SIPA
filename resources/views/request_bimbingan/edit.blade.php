@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.utama')
 
 @section('title', 'Edit Request Bimbingan')
 

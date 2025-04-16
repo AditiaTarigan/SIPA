@@ -1,9 +1,9 @@
 {{-- resources/views/request_judul/index.blade.php --}}
 {{-- Extend layout utama kamu jika ada --}}
-@extends('layouts.app')
+@extends('layouts.utama')
 
 {{-- @section('content') --}}
-<div class="container"> {{-- Atau div lain sesuai layout --}}
+<div class="container" padding="10px"> {{-- Atau div lain sesuai layout --}}
     <h2>Daftar Request Judul Project Akhir</h2>
 
     {{-- Tampilkan pesan sukses jika ada --}}

@@ -1,11 +1,11 @@
 {{-- File: resources/views/request_bimbingan/index.blade.php --}}
-@extends('layouts.app') {{-- Use YOUR layout file --}}
+@extends('layouts.utama') {{-- Use YOUR layout file --}}
 
 @section('title', 'Daftar Request Bimbingan') {{-- Change title if desired --}}
 
 @section('content')
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1>Request Bimbingan</h1>
+        <h1 colour="dark">Request Bimbingan</h1>
         {{-- Make sure the user role check is appropriate for who can create --}}
         @if(Auth::user()->role == 'mahasiswa')
              <a href="{{ route('request-bimbingan.create') }}" class="btn btn-primary">Buat Request Baru</a>
