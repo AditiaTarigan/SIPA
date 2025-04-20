@@ -31,7 +31,6 @@
                             <th>Bimbingan Ke</th>
                             <th>Lokasi</th>
                             <th>Tujuan Singkat</th>
-                            <th>Status</th> {{-- Add status logic later --}}
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -48,10 +47,6 @@
                                 <td>{{ $request->bimbingan_ke }}</td>
                                 <td>{{ $request->lokasi }}</td>
                                 <td>{{ Str::limit($request->tujuan_bimbingan, 50) }}</td>
-                                <td>
-                                    {{-- Placeholder for status - Implement this based on your logic --}}
-                                    <span class="badge bg-warning text-dark">Pending</span>
-                                </td>
                                 <td>
                                     <a href="{{ route('request-bimbingan.show', $request->id) }}" class="btn btn-info btn-sm" title="Lihat Detail">
                                         <i class="fa fa-eye"></i> {{-- Example using Font Awesome --}}

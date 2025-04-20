@@ -15,6 +15,7 @@ use App\Http\Controllers\RequestBimbinganController;
 // use App\Http\Controllers\DokumenController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,8 +87,8 @@ Route::middleware(['auth'])->group(function () {
 
     // --- Example Admin Dashboard Route (define controller/view) ---
     Route::get('/admin/dashboard', function() {
-        return "Admin Dashboard Placeholder"; // Replace with actual view/controller
-    })->name('admin.dashboard')->middleware('role:admin'); // Example: Restrict to admin role
+        return view('dashboard.admin'); // Replace with actual view/controller
+    })->name('dashboard.admin')->middleware('role:admin'); // Example: Restrict to admin role
 
 }); // End of Auth Middleware Group
 
