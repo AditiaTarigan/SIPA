@@ -1,12 +1,15 @@
 <link href="{{ asset('css/reqjudul.css') }}" rel="stylesheet">
 
 @extends('layouts.app')
+@extends('layouts.utama')
 
 @section('title', 'Detail Request Judul')
 
 @section('content')
 <div class="container">
     <h1 style="color: black">Detail Request Judul</h1>
+<div class="container" padding="10px">
+    <h1>Detail Request Judul</h1>
 
     <div class="card">
         <div style="color: black" class="card-header">

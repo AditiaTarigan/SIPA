@@ -1,11 +1,10 @@
-<link href="{{ asset('css/reqjudul.css') }}" rel="stylesheet">
 @extends('layouts.app')
 
 @section('title', 'Edit Request Judul')
 
 @section('content')
 <div class="container">
-    <h1 style="color:black">Edit Request Judul</h1>
+    <h1>Edit Request Judul</h1>
 
     <div class="card">
         <div class="card-body">

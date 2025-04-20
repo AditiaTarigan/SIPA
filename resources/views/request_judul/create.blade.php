@@ -2,6 +2,8 @@
 <link href="{{ asset('css/reqjudul.css') }}" rel="stylesheet">
 @extends('layouts.app')
 
+@extends('layouts.utama')
+
  @section('content')
 <div class="container">
     <h2 style="color: black">Ajukan Judul Skripsi Baru</h2>
