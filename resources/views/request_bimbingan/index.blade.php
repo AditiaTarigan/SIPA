@@ -1,4 +1,7 @@
 {{-- File: resources/views/request_bimbingan/index.blade.php --}}
+<link href="{{ asset('css/reqbim.css') }}" rel="stylesheet">
+
+@extends('layouts.app') {{-- Use YOUR layout file --}}
 @extends('layouts.utama') {{-- Use YOUR layout file --}}
 
 @section('title', 'Daftar Request Bimbingan') {{-- Change title if desired --}}
@@ -19,7 +22,7 @@
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th>No</th>
                             @if(Auth::user()->role != 'mahasiswa') {{-- Show student details if not a student view --}}
                                 <th>NIM</th>
                                 <th>Nama Mahasiswa</th>
@@ -29,7 +32,6 @@
                             <th>Bimbingan Ke</th>
                             <th>Lokasi</th>
                             <th>Tujuan Singkat</th>
-                            <th>Status</th> {{-- Add status logic later --}}
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -46,10 +48,6 @@
                                 <td>{{ $request->bimbingan_ke }}</td>
                                 <td>{{ $request->lokasi }}</td>
                                 <td>{{ Str::limit($request->tujuan_bimbingan, 50) }}</td>
-                                <td>
-                                    {{-- Placeholder for status - Implement this based on your logic --}}
-                                    <span class="badge bg-warning text-dark">Pending</span>
-                                </td>
                                 <td>
                                     <a href="{{ route('request-bimbingan.show', $request->id) }}" class="btn btn-info btn-sm" title="Lihat Detail">
                                         <i class="fa fa-eye"></i> {{-- Example using Font Awesome --}}
