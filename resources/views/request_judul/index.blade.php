@@ -1,7 +1,7 @@
     {{-- resources/views/request_judul/index.blade.php --}}
     {{-- Extend layout utama kamu jika ada --}}
     <link href="{{ asset('css/reqjudul.css') }}" rel="stylesheet">
-    @extends('layouts.app')
+    @extends('layouts.utama')
 
     @section('content')
     <div class="container"> {{-- Atau div lain sesuai layout --}}

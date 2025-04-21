@@ -1,0 +1,43 @@
+<link href="{{ asset('css/reqbim.css') }}" rel="stylesheet">
+@extends('layouts.utama')
+
+@section('content')
+<div class="container">
+    <h2>Form Submit Dokumen</h2>
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form action="{{ route('dokumen.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="mb-3">
+            <label for="nama" class="form-label">Nama</label>
+            <input type="text" class="form-control" id="nama" name="nama" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="prodi" class="form-label">Program Studi</label>
+            <input type="text" class="form-control" id="prodi" name="prodi" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="nomor_kelompok" class="form-label">Nomor Kelompok</label>
+            <input type="text" class="form-control" id="nomor_kelompok" name="nomor_kelompok" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="dokumen" class="form-label">Upload Dokumen</label>
+            <input type="file" class="form-control" id="dokumen" name="dokumen" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+@endsection

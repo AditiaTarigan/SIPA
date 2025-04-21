@@ -1,7 +1,6 @@
 {{-- File: resources/views/request_bimbingan/index.blade.php --}}
 <link href="{{ asset('css/reqbim.css') }}" rel="stylesheet">
 
-@extends('layouts.app') {{-- Use YOUR layout file --}}
 @extends('layouts.utama') {{-- Use YOUR layout file --}}
 
 @section('title', 'Daftar Request Bimbingan') {{-- Change title if desired --}}

@@ -1,6 +1,5 @@
 {{-- resources/views/request_judul/create.blade.php --}}
 <link href="{{ asset('css/reqjudul.css') }}" rel="stylesheet">
-@extends('layouts.app')
 
 @extends('layouts.utama')
 

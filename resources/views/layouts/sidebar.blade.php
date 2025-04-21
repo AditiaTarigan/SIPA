@@ -23,7 +23,7 @@
             <li><a href="{{ route('request-judul.index') }}"><span class="icon fa fa-lightbulb icon"></span><span class="item-name">AjukanJudul</span></a><span class="tooltip">AjukanJudul</span></li>
             <li><a href="{{ route('request-bimbingan.index') }}"><span class="icon fa fa-chart-line"></span><span class="item-name"> AjukanBimbingan</span></a><span class="tooltip">AjukanBimbingan</span></li>
             <li><a href="#"><span class="icon fa fa-file-upload icon"></span><span class="item-name">Log Activity   </span></a><span class="tooltip">LogActivity</span></li>
-            <li><a href="#"><span class="icon fa fa-user"></span><span class="item-name">Dokumen</span></a><span class="tooltip">Dokumen</span></li>
+            <li><a href="{{ route('dokumen.index')}}"><span class="icon fa fa-user"></span><span class="item-name">Dokumen</span></a><span class="tooltip">Dokumen</span></li>
             <li><a href="#"><span class="icon fa fa-gear"></span><span class="item-name">CatatanBimbingan</span></a><span class="tooltip">CatatanBimbingan</span></li>
             <li><a href="{{ route('mahasiswa.index') }}"><span class="icon fa fa-comment-dots"></span><span class="item-name">ChatPA</span></a><span class="tooltip">ChatPA</span></li>
             <li><a href="logout"><span class="icon fa fa-right-from-bracket"></span><span class="item-name">Logout</span></a><span class="tooltip">Logout</span></li>

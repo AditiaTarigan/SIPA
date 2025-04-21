@@ -103,6 +103,9 @@ Route::get('/test-db', function () {
     }
 });
 
+Route::resource('dokumen', DokumenController::class);
+
+
 // If you are using Laravel's built-in Auth scaffolding (like Breeze or Jetstream),
 // their routes might be included separately, often via:
 // require __DIR__.'/auth.php';

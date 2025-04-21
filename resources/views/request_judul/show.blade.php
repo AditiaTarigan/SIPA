@@ -1,6 +1,5 @@
 <link href="{{ asset('css/reqjudul.css') }}" rel="stylesheet">
 
-@extends('layouts.app')
 @extends('layouts.utama')
 
 @section('title', 'Detail Request Judul')
