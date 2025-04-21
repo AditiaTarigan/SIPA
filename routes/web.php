@@ -6,6 +6,7 @@ use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\RequestJudulController;
 use App\Http\Controllers\RequestBimbinganController;
+use App\Http\Controllers\HistoryController;
 // Commented out controllers - uncomment when needed
 // use App\Http\Controllers\JudulController;
 // use App\Http\Controllers\BimbinganController;
@@ -51,6 +52,8 @@ Route::middleware(['auth'])->group(function () {
     // --- Mahasiswa Specific Routes (Example) ---
     // Consider adding role middleware here if needed: ->middleware('role:mahasiswa')
     Route::resource('mahasiswa', MahasiswaController::class);
+
+    Route::resource('history', HistoryController::class);
 
     // --- Dosen Specific Routes (Example) ---
     // Consider adding role middleware here if needed: ->middleware('role:dosen')
