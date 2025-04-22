@@ -13,7 +13,7 @@ use App\Http\Controllers\HistoryController;
 // use App\Http\Controllers\LogActivityController;
 // use App\Http\Controllers\CatatanController;
 // use App\Http\Controllers\ChatController;
-// use App\Http\Controllers\DokumenController;
+use App\Http\Controllers\DokumenController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -54,6 +54,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('mahasiswa', MahasiswaController::class);
 
     Route::resource('history', HistoryController::class);
+
+    Route::resource('dokumen', DokumenController::class);
 
     // --- Dosen Specific Routes (Example) ---
     // Consider adding role middleware here if needed: ->middleware('role:dosen')
@@ -105,8 +107,6 @@ Route::get('/test-db', function () {
         return 'Could not connect. ' . $e->getMessage();
     }
 });
-
-Route::resource('dokumen', DokumenController::class);
 
 
 // If you are using Laravel's built-in Auth scaffolding (like Breeze or Jetstream),

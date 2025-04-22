@@ -1,9 +1,9 @@
-<link href="{{ asset('css/reqbim.css') }}" rel="stylesheet">
+<link href="{{ asset('css/dokumen.css') }}" rel="stylesheet">
 @extends('layouts.utama')
 
 @section('content')
 <div class="container">
-    <h2>Form Submit Dokumen</h2>
+    <h2 style="color: black">Form Submit Dokumen</h2>
 
     @if ($errors->any())
         <div class="alert alert-danger">

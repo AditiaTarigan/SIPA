@@ -1,0 +1,111 @@
+/* Import font jika diinginkan (opsional) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+body {
+    /* Mengatur background dasar halaman */
+    background-color: #f4f7f6;
+    /* Menggunakan font yang lebih modern jika diimpor */
+    font-family: 'Poppins', sans-serif;
+    /* Warna teks default */
+    color: #333;
+}
+
+/* Styling untuk container utama form */
+.container {
+    /* Memberi background putih pada area form */
+    background-color: #ffffff;
+    /* Menambah padding di dalam container */
+    padding: 30px;
+    /* Memberi sudut melengkung */
+    border-radius: 8px;
+    /* Memberi bayangan halus */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Menambah margin atas agar tidak terlalu menempel ke atas */
+    margin-top: 40px;
+    max-width: 700px; /* Membatasi lebar maksimum form agar tidak terlalu lebar di layar besar */
+}
+
+/* Styling untuk judul form (h2) */
+.container h2 {
+    /* Mengatur warna judul (meskipun ada inline style, ini bisa jadi fallback) */
+    color: #2c3e50; /* Warna biru tua yang lebih lembut dari hitam pekat */
+    /* Mengatur teks ke tengah */
+    text-align: center;
+    /* Menambah jarak bawah dari judul ke elemen berikutnya */
+    margin-bottom: 30px;
+    /* Memberi garis bawah tipis */
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+/* Styling untuk label form */
+.form-label {
+    /* Membuat teks label sedikit tebal */
+    font-weight: 500;
+    /* Mengatur warna teks label */
+    color: #555;
+    /* Menambah sedikit jarak bawah dari label ke input */
+    margin-bottom: 8px;
+}
+
+/* Styling umum untuk input field */
+.form-control {
+    /* Memberi sedikit lengkungan pada input */
+    border-radius: 4px;
+    /* Mengatur border */
+    border: 1px solid #ced4da;
+    /* Menambah padding di dalam input */
+    padding: 10px 12px;
+}
+
+/* Styling saat input field mendapatkan fokus */
+.form-control:focus {
+    /* Warna border saat fokus (mengikuti standar Bootstrap biru muda) */
+    border-color: #80bdff;
+    /* Menghilangkan outline default dan mengganti dengan box-shadow (standar Bootstrap) */
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Styling untuk tombol submit */
+.btn-primary {
+    /* Warna background tombol (biru Bootstrap) */
+    background-color: #007bff;
+    /* Warna border tombol */
+    border-color: #007bff;
+    /* Warna teks tombol */
+    color: #ffffff;
+    /* Menambah padding pada tombol */
+    padding: 10px 20px;
+    /* Mengatur font weight */
+    font-weight: 500;
+    /* Memberi sedikit lengkungan */
+    border-radius: 5px;
+    /* Menghaluskan transisi saat hover */
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    /* Menambah margin atas sebelum tombol */
+    margin-top: 15px;
+    /* Membuat tombol memenuhi lebar kontainer (opsional, hapus jika tidak suka) */
+    /* width: 100%; */
+}
+
+/* Styling saat kursor mouse di atas tombol submit */
+.btn-primary:hover {
+    background-color: #0056b3; /* Warna biru lebih gelap saat hover */
+    border-color: #0056b3;
+    color: #ffffff;
+}
+
+/* Styling untuk pesan error (opsional, jika ingin override Bootstrap) */
+.alert-danger {
+    background-color: #f8d7da; /* Warna background */
+    border-color: #f5c6cb;   /* Warna border */
+    color: #721c24;         /* Warna teks */
+    border-radius: 5px;      /* Sedikit lengkungan */
+    margin-top: 20px;        /* Jarak atas */
+}
+
+.alert-danger ul {
+    margin-bottom: 0; /* Menghilangkan margin bawah default dari list */
+    padding-left: 20px; /* Menambah sedikit padding kiri pada list */
+}

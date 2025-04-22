@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="container">
-    <h2>Edit Dokumen</h2>
+    <h2 style="color: black">Submit Dokumen</h2>
 
     <form action="{{ route('dokumen.update', $dokumen->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
