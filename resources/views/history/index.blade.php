@@ -7,7 +7,7 @@
 <div class="my-3 p-3 bg-body rounded shadow-sm">
     <!-- FORM PENCARIAN -->
     <div class="pb-3">
-        <form class="d-flex" action="{{ url('mahasiswa') }}" method="get">
+        <form class="d-flex" action="{{ url('history') }}" method="get">
             <input class="form-control me-1" type="search" name="katakunci"
                    value="{{ Request::get('katakunci') }}"
                    placeholder="Masukkan kata kunci" aria-label="Search">
@@ -24,6 +24,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
+                <th class="col-md-1">No</th>
                 <th class="col-md-1">Tanggal Bimbingan</th>
                 <th class="col-md-3">Topik Bimbingan</th>
                 <th class="col-md-4">Hasil Bimbingan</th>
@@ -43,10 +44,14 @@
                     <td>{{ $item->hasil }}</td>
                     <td>{{ $item->tanggal2 }}</td>
                     <td>{{ $item->jumlah }}</td>
+                    <td></td>
                     <td>
-                        <a href="{{ url('mahasiswa/'.$item->nim.'/edit') }}" class="btn btn-warning btn-sm">Edit</a>
+                        <!-- Edit Button -->
+                        <a href="{{ url('history/'.$item->id.'/edit') }}" class="btn btn-warning btn-sm">Edit</a>
+
+                        <!-- Delete Button -->
                         <form onsubmit="return confirm('Yakin akan menghapus data?')"
-                              class="d-inline" action="{{ url('mahasiswa/'.$item->nim) }}"
+                              class="d-inline" action="{{ url('history/'.$item->id) }}"
                               method="post">
                             @csrf
                             @method('DELETE')
