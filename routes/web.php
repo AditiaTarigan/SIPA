@@ -88,7 +88,7 @@ Route::middleware(['auth'])->group(function () {
 
     // --- Logout Route ---
     // Place it here for logical grouping of authenticated actions
-    Route::get('/logout', [SesiController::class,'logout'])->name('logout');
+    Route::post('/logout', [SesiController::class,'logout'])->name('logout');
 
     // --- Example Admin Dashboard Route (define controller/view) ---
     Route::get('/admin/dashboard', function() {

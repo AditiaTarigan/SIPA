@@ -1,173 +1,331 @@
+/* public/css/sidebar.css */
 @import url(https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@400&display=swap);
-@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.css);
-@import url(https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/css/boxicons.min.css);
-@import url(https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css);
+/* Pastikan Font Awesome sudah di-load via layout jika perlu, atau uncomment di bawah */
+/* @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.css); */
+/* @import url(https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/css/boxicons.min.css); */
+/* @import url(https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css); */
+
+:root {
+  --menu-width: 260px; /* Sedikit lebih sempit mungkin? Sesuaikan */
+  --collapsed-width: 70px; /* Lebar saat collapse */
+  --header-height: 60px; /* Tinggi header Anda */
+}
 
 body {
-    font-family: "Baloo Bhai 2";
-    background: #dedcdc;
-    min-height: 100vh;
-    margin: 0;
+  font-family: "Baloo Bhai 2", sans-serif; /* Tambahkan fallback */
+  /* background: #dedcdc; */ /* Background diatur oleh main atau elemen lain */
+  min-height: 100vh;
+  margin: 0;
+  /* Hapus display: flex; flex-direction: column; - Biarkan struktur HTML yg atur */
+  /* color: white; */ /* Hapus default color white, biarkan elemen yg atur */
+  background-color: #f8f9fa; /* Warna background umum body (Bootstrap light) */
+}
+
+/* --- Header --- */
+header.app-header { /* Beri kelas spesifik jika perlu */
+  background: #292929;
+  width: 100%;
+  height: var(--header-height);
+  position: fixed;
+  top: 0;
+  left: 0; /* Pastikan menempel kiri */
+  z-index: 1030; /* Z-index header (di bawah sidebar jika sidebar overlay) */
+  /* Tambahkan style lain jika perlu: display: flex, align-items, padding, etc. */
+}
+
+/* --- Sidebar --- */
+aside.app-sidebar { /* Beri kelas spesifik */
+  position: fixed;
+  top: 0; /* Mulai dari atas */
+  /* top: var(--header-height); */ /* OPSI: Jika ingin sidebar mulai DI BAWAH header */
+  left: 0;
+  width: var(--menu-width);
+  /* height: 100vh; */ /* Jika mulai dari atas */
+  height: calc(100vh - var(--header-height)); /* OPSI: Jika mulai di bawah header */
+  background: #282c34;
+  color: #adb5bd; /* Warna teks default sidebar */
+  z-index: 1031; /* Z-index sidebar (di atas header jika menutupi) */
+  transition: width 0.3s ease-in-out;
+  display: flex; /* Untuk menata konten internal */
+  flex-direction: column;
+  overflow-x: hidden; /* Sembunyikan overflow horizontal */
+}
+
+/* State Collapsed pada BODY */
+body.collapsed aside.app-sidebar {
+  width: var(--collapsed-width);
+}
+
+/* --- Tombol Toggle --- */
+aside.app-sidebar .menu-btn {
+  color: white;
+  position: absolute;
+  top: 15px; /* Sesuaikan agar pas secara vertikal */
+  /* Jika sidebar mulai di bawah header, sesuaikan 'top' ini atau relatifkan ke parent */
+  right: -15px; /* Menonjol keluar */
+  padding: 8px;
+  border: none;
+  font-size: 15px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 2px 0px 5px 0px #1a1a1a;
+  background: #282c34; /* Sama dengan bg sidebar */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s;
+  z-index: 1032; /* Di atas sidebar */
+}
+
+body.collapsed aside.app-sidebar .menu-btn {
+  transform: rotate(180deg);
+}
+
+/* --- Logo --- */
+aside.app-sidebar .logo-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 15px; /* Sesuaikan padding */
+  overflow: hidden;
+  white-space: nowrap;
+  flex-shrink: 0; /* Jangan biarkan area logo menyusut */
+  color: #fff; /* Warna teks logo */
+}
+
+aside.app-sidebar .logo-wrapper img {
+  width: 40px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+aside.app-sidebar .brand-name {
+  font-size: 1rem; /* Sesuaikan ukuran font */
+  line-height: 1.2;
+  font-weight: 600;
+  transition: opacity 0.2s ease 0.1s, visibility 0.2s ease 0.1s;
+}
+
+body.collapsed aside.app-sidebar .brand-name {
+  opacity: 0;
+  visibility: hidden;
+  width: 0;
+}
+body.collapsed aside.app-sidebar .logo-wrapper {
+    padding-left: 10px;
+    padding-right: 10px;
+    justify-content: center; /* Pusatkan logo */
+}
+body.collapsed aside.app-sidebar .logo-wrapper img {
+    /* Ukuran tetap sama */
+}
+
+
+/* --- Separator --- */
+aside.app-sidebar .separator {
+  width: calc(100% - 30px); /* Lebar pemisah */
+  height: 1px;
+  background-color: #495057; /* Warna abu-abu gelap */
+  margin: 10px auto; /* Tengah horizontal */
+  flex-shrink: 0;
+}
+
+/* --- Menu Items --- */
+aside.app-sidebar .menu-items {
+  margin-top: 10px;
+  list-style: none;
+  padding: 0 10px; /* Padding kiri-kanan untuk list */
+  flex-grow: 1; /* Ambil sisa ruang */
+  overflow-y: auto; /* Scroll jika perlu */
+  overflow-x: hidden;
+}
+
+aside.app-sidebar .menu-items li {
+    position: relative; /* Untuk tooltip */
+}
+
+aside.app-sidebar .menu-items a {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 15px; /* Padding link */
+  margin-bottom: 5px; /* Jarak antar link */
+  overflow: hidden;
+  border-radius: 5px; /* Radius sudut link */
+  transition: background 0.2s ease, color 0.2s ease;
+  color: #adb5bd; /* Warna teks link default */
+  white-space: nowrap;
+}
+
+aside.app-sidebar .menu-items a:hover,
+aside.app-sidebar .menu-items li.active a { /* Tambahkan .active jika ada logic active menu */
+  color: #ffffff;
+  background: #495057; /* Warna background hover/active */
+}
+
+aside.app-sidebar .icon {
+  font-size: 1.1rem; /* Ukuran ikon */
+  text-align: center;
+  min-width: 25px; /* Lebar minimum ikon */
+  flex-shrink: 0; /* Jangan menyusut */
+}
+
+aside.app-sidebar .item-name {
+  transition: opacity 0.2s ease 0.1s, visibility 0.2s ease 0.1s;
+  font-size: 0.95rem;
+}
+
+body.collapsed aside.app-sidebar .item-name {
+  opacity: 0;
+  visibility: hidden;
+  width: 0;
+}
+
+body.collapsed aside.app-sidebar .menu-items a {
+    justify-content: center;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+/* --- Tooltip --- */
+aside.app-sidebar .tooltip {
+  position: absolute;
+  left: calc(var(--collapsed-width) + 5px); /* Posisi saat collapsed */
+  top: 50%;
+  color: white;
+  background: #161616;
+  padding: 5px 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-50%);
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 1040;
+}
+
+body.collapsed aside.app-sidebar .menu-items li:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* --- Main Content Area --- */
+main.app-content { /* Beri kelas spesifik */
+  margin-left: var(--menu-width);
+  width: calc(100% - var(--menu-width));
+  transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
+  padding: 20px; /* Padding konten */
+  padding-top: calc(var(--header-height) + 20px); /* Padding atas = tinggi header + jarak */
+  /* color: white; */ /* HAPUS INI - biarkan konten yg atur warna teks */
+  color: #212529; /* Warna teks default untuk konten (Bootstrap dark) */
+  background-color: #f8f9fa; /* Warna background konten (Bootstrap light) */
+  min-height: calc(100vh - var(--header-height)); /* Tinggi minimum konten */
+  box-sizing: border-box;
+}
+
+body.collapsed main.app-content {
+  margin-left: var(--collapsed-width);
+  width: calc(100% - var(--collapsed-width));
+}
+
+/* ============================================ */
+/* ---     KONSISTENSI TABEL & KONTROL    --- */
+/* ============================================ */
+
+/* Area Kontrol (Search & Tombol Tambah) */
+.controls-area {
     display: flex;
-    flex-direction: column;
-    color: white;
-  }
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Agar responsif */
+    gap: 15px; /* Jarak antar elemen */
+    margin-bottom: 1.5rem; /* Jarak ke bawah (ke tabel) */
+}
 
+/* Styling Tabel Umum (Gunakan bersama kelas Bootstrap) */
+.data-table {
+    /* Bootstrap .table sudah menangani border-collapse, width 100% */
+    font-size: 0.9rem; /* Ukuran font tabel */
+    border-color: #dee2e6; /* Warna border default Bootstrap */
+}
 
-    :root {
-      --menu-width: 300px;
-      --collapsed-width: 60px;
+.data-table thead th {
+    background-color: #e9ecef; /* Warna header Bootstrap */
+    color: #495057;
+    font-weight: 600;
+    vertical-align: middle;
+    white-space: nowrap; /* Cegah header wrap */
+    border-color: #dee2e6;
+    border-bottom-width: 2px; /* Border bawah header lebih tebal */
+}
+
+.data-table tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.05); /* Warna hover halus */
+}
+
+.data-table td {
+    vertical-align: middle; /* Vertikal tengah */
+    border-color: #dee2e6;
+}
+
+/* Kolom spesifik jika perlu lebar berbeda atau wrap */
+.data-table .col-wrap { white-space: normal !important; } /* Kelas helper utk wrap */
+.data-table .col-no { width: 5%; }
+.data-table .col-tanggal { width: 12%; }
+.data-table .col-topik { width: 20%; white-space: normal; }
+.data-table .col-hasil { width: 25%; white-space: normal; }
+.data-table .col-rencana { width: 20%; white-space: normal; }
+.data-table .col-jumlah { width: 8%; }
+.data-table .col-ttd { width: 8%; }
+.data-table .col-aksi { width: 10%; }
+
+/* Pesan data kosong */
+.data-table .empty-message td {
+    text-align: center;
+    padding: 30px 15px;
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* Responsivitas Tabel (Bootstrap sudah punya .table-responsive) */
+/* Pastikan tabel dibungkus <div class="table-responsive"> */
+
+/* --- Media Queries (Contoh untuk layar kecil) --- */
+@media (max-width: 768px) {
+    /* Opsi: Sembunyikan sidebar di mobile kecuali di-trigger */
+    /* aside.app-sidebar {
+        width: 0;
     }
-
-    .logo-wrapper img {
-        width: 40px;
-        height: auto;
-    }
-
-    header {
-        background: #292929;
+    main.app-content {
+        margin-left: 0;
         width: 100%;
-        height: 60px;
-        position: fixed;
-        top: 0;
-        z-index: 999;
-      }
-
-      aside {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: var(--menu-width);
-        height: 100vh;
-        background: #282c34;
-        z-index: 999; /* z-index sidebar */
-        transition: width 0.3s ease-in-out;
-      }
-
-      .collapsed aside {
-        width: var(--collapsed-width);
-      }
-
-    .menu-btn {
-        color: white;
-        position: absolute;
-        top: 20px;
-        right: -15px;
-        padding: 8px;
-        border: none;
-        font-size: 15px;
-        aspect-ratio: 1;
-        border-radius: 50%;
-        cursor: pointer;
-        box-shadow: 2px 0px 5px 0px #1a1a1a;
-        background: #282c34;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: transform 0.3s;
-      }
-
-      .collapsed .menu-btn {
-        transform: rotate(180deg);
-      }
-
-      .logo-wrapper {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        padding: 10px;
-        overflow: hidden;
-        white-space: nowrap;
-      }
-
-      .brand-name {
-        font-size: 20px;
-        transition: opacity 0.3s, visibility 0.3s;
-      }
-
-      .collapsed .brand-name {
-        opacity: 0;
-        visibility: hidden;
-      }
-
-    a {
-      text-decoration: none;
-      color: whitesmoke;
     }
-
-    .separator {
-        width: 100%;
-        height: 1px;
-        background-color: black;
-      }
-
-    .menu-items {
-        margin-top: 15px;
-        list-style: none;
-        padding: 0;
-      }
-
-      .menu-items a {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        padding: 10px;
-        margin-bottom: 10px;
-        overflow: hidden;
-        border-radius: 10px;
-        transition: background 0.3s;
-      }
-
-      .menu-items a:hover {
-        color: #daddff;
-        background: #00000017;
-      }
-
-      .icon {
-        font-size: 20px;
-        text-align: center;
-        min-width: 20px;
-      }
-
-      .item-name {
-        transition: opacity 0.3s, visibility 0.3s;
-      }
-
-      .collapsed .item-name {
-        opacity: 0;
-        visibility: hidden;
-      }
-
-      .tooltip {
-        position: absolute;
-        left: 100%;
-        top: 50%;
-        color: white;
-        background: #161616;
-        padding: 5px 10px;
-        font-size: 14px;
-        border-radius: 5px;
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-50%);
-        transition: opacity 0.3s;
-      }
-
-      .collapsed .menu-items li:hover .tooltip {
-        visibility: visible;
-        opacity: 1;
-      }
-
-      main {
-        margin-left: var(--menu-width);
-        width: calc(100% - var(--menu-width));
-        transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
-        padding: 20px;
-        padding-top: 80px;
-        color: white;
-      }
-
-      .collapsed main {
+    body.collapsed aside.app-sidebar {
+         width: var(--collapsed-width); // Tetap bisa expand
+    }
+    body.collapsed main.app-content {
         margin-left: var(--collapsed-width);
         width: calc(100% - var(--collapsed-width));
-      }
+    } */
+
+    .controls-area {
+        flex-direction: column;
+        align-items: stretch; /* Kontrol memenuhi lebar */
+    }
+    .controls-area form { /* Target form search */
+        width: 100%;
+        max-width: none; /* Hapus max-width jika ada */
+    }
+    .controls-area .btn { /* Target tombol */
+        width: 100%;
+    }
+
+    /* Judul halaman mungkin perlu margin atas lebih kecil */
+    main.app-content h1.h3,
+    main.app-content .h3 {
+        margin-top: 0;
+    }
+}
