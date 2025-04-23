@@ -17,7 +17,7 @@
 
     <!-- TOMBOL TAMBAH DATA -->
     <div class="pb-3">
-        <a href="{{ url('mahasiswa/create') }}" class="btn btn-primary">+ Tambah Data</a>
+        <a href="{{ url('history/create') }}" class="btn btn-primary">+ Tambah Data</a>
     </div>
 
     <!-- TABEL DATA -->
@@ -38,9 +38,11 @@
             @foreach ($data as $item)
                 <tr>
                     <td>{{ $i }}</td>
-                    <td>{{ $item->nim }}</td>
-                    <td>{{ $item->prodi }}</td>
-                    <td>{{ $item->angkatan }}</td>
+                    <td>{{ $item->tanggal }}</td>
+                    <td>{{ $item->topik }}</td>
+                    <td>{{ $item->hasil }}</td>
+                    <td>{{ $item->tanggal2 }}</td>
+                    <td>{{ $item->jumlah }}</td>
                     <td>
                         <a href="{{ url('mahasiswa/'.$item->nim.'/edit') }}" class="btn btn-warning btn-sm">Edit</a>
                         <form onsubmit="return confirm('Yakin akan menghapus data?')"

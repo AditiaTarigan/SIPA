@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\HistoryBimbingan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class HistoryController extends Controller
 {
@@ -12,7 +13,8 @@ class HistoryController extends Controller
      */
     public function index()
     {
-        return view('history.index');
+        $data = history::orderBy('tanggal','desc')->get();
+        return view('history.index')->with('data',$data);
     }
 
     /**
@@ -28,12 +30,23 @@ class HistoryController extends Controller
      */
     public function store(Request $request)
     {
+        Session::flash('tanggal',$request->tanggal);
+        Session::flash('topik',$request->topik);
+        Session::flash('hasil',$request->hasil);
+        Session::flash('tanggal2',$request->tanggal2);
+        Session::flash('jumlah',$request->jumlah);
         $request->validate([
             'tanggal' => 'required',
             'topik' => 'required',
             'hasil' => 'required',
             'tanggal2' => 'required',
             'jumlah' => 'required|numeric',
+        ],[
+            'tanggal.required'=>'Tanggal wajib diisi',
+            'topik.required'=>'Topik wajib diisi',
+            'hasil.required'=>'Hasil wajib diisi',
+            'tanggal2.required'=>'Rencana Bimbingan wajib diisi',
+            'jumlah.required'=>'Jumlah Mahasiswa wajib diisi',
         ]);
         $data = [
             'tanggal' => $request->tanggal,
@@ -43,7 +56,7 @@ class HistoryController extends Controller
             'jumlah' => $request->jumlah,
         ];
         HistoryBimbingan::create($data);
-        return 'Hi';
+        return redirect()->to('history')->with('success','Berhasil menambahkan data');
     }
 
     /**
