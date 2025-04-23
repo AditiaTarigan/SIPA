@@ -4,6 +4,9 @@
 @section('content')
 <div class="container">
     <h2>Riwayat Submit Dokumen</h2>
+    <div class="pb-3">
+        <a href="{{ url('dokumen/create') }}" class="btn btn-primary">+ Tambah Data</a>
+    </div>
     <form action="" method="POST" enctype="multipart/form-data">
         <table class="table table-bordered">
             <thead>
