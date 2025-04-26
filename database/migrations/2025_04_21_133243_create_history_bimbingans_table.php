@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('history_bimbingan', function (Blueprint $table) {
+            $table->id();
             $table->date('tanggal');
             $table->string('topik');
             $table->string('hasil');

@@ -51,20 +51,20 @@
                             <td>
                                 {{-- Pastikan route 'submit_dokumen.edit' dan 'submit_dokumen.show' ada --}}
                                 {{-- Tambahkan title untuk tooltip dan ikon jika diinginkan --}}
-                                <a href="{{ route('submit_dokumen.edit', $dokumen->id) }}" class="btn btn-sm btn-warning" title="Edit">
+                                <a href="{{ route('dokumen.edit', $dokumen->id) }}" class="btn btn-sm btn-warning" title="Edit">
                                     <i class="fas fa-edit"></i> Edit {{-- Hapus ikon jika tidak pakai FontAwesome --}}
                                 </a>
-                                <a href="{{ route('submit_dokumen.show', $dokumen->id) }}" class="btn btn-sm btn-info" title="Lihat">
+                                <a href="{{ route('dokumen.show', $dokumen->id) }}" class="btn btn-sm btn-info" title="Lihat">
                                     <i class="fas fa-eye"></i> Lihat {{-- Hapus ikon jika tidak pakai FontAwesome --}}
                                 </a>
                                 {{-- Tambahkan tombol lain jika perlu (misal: Hapus) --}}
-                                {{-- <form action="{{ route('submit_dokumen.destroy', $dokumen->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+                                <form action="{{ route('dokumen.destroy', $dokumen->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger" title="Hapus">
                                         <i class="fas fa-trash"></i> Hapus
                                     </button>
-                                </form> --}}
+                                </form>
                             </td>
                         </tr>
                         @empty
