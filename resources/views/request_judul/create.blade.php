@@ -5,7 +5,7 @@
 
  @section('content')
 <div class="container">
-    <h2 style="color: black">Ajukan Judul Skripsi Baru</h2>
+    <h2>Ajukan Judul Skripsi Baru</h2>
 
     {{-- Tampilkan error validasi jika ada --}}
     @if ($errors->any())
@@ -56,4 +56,5 @@
         <a href="{{ route('request-judul.index') }}" class="btn btn-secondary">Batal</a>
     </form>
 </div>
-{{-- @endsection --}}
+
+    @endsection

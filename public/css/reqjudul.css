@@ -1,14 +1,30 @@
 .container {
-    padding-top: 4rem; /* Add some space at the top */
-    padding-bottom: 4rem; /* Add some space at the bottom */
+    padding-left: 20rem;;
+    padding-top: 2%; /* Add some space at the top */
+    padding-bottom: 2rem; /* Add some space at the bottom */
     background-color: #ffffff; /* White background for content area */
-    border-radius: 8px; /* Slightly rounded corners for the container */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow */
-    margin-top: 2rem; /* Space above the container */
+    border-radius: 2rem; /* Slightly rounded corners for the container */
+    margin-top: -1rem; /* Space above the container */
     margin-bottom: 2rem; /* Space below the container */
+
 }
 
 
+h1, h2, h3 {
+    color: blue !important;
+}
+
+dt.col-sm-3 {
+    color: black;
+  }
+
+dd {
+    color: #000;
+}
+
+.class-card-header {
+    color: #000;
+}
 
 /* Forms (create.blade.php, edit.blade.php) */
 form {
@@ -51,24 +67,25 @@ form a.btn-secondary {
 }
 
 
-
-
 /* Table (index.blade.php) */
 .table {
-    margin-top: 1.5rem; /* Space above the table */
-    border: 1px solid #dee2e6; /* Add a border around the table */
+    margin-top: 1rem; /* Space above the table */
+    border: 1px solid #000000; /* Add a border around the table */
+
 }
 
-.table thead th {
-    background-color: #e9ecef; /* Light grey background for header */
-    color: #495057; /* Darker text for header */
+.table thead tr {
+    background-color: #0080ff; /* Light grey background for header */
+    color: #ffffff; /* Darker text for header */
     vertical-align: middle; /* Align header text vertically */
     font-weight: 600; /* Bolder header text */
     border-bottom-width: 2px; /* Thicker bottom border for header */
+    border-radius: 10rem;
 }
 
 .table tbody td {
     vertical-align: middle; /* Align cell content vertically */
+    border-right: 10rem;
 }
 
 /* Style table action buttons */
@@ -135,11 +152,4 @@ form a.btn-secondary {
 
 .card-footer .btn {
     margin-left: 0.5rem; /* Space between buttons in footer */
-}
-
-
-/* Alert Messages */
-.alert {
-    border-radius: 0.375rem; /* Consistent border radius */
-    margin-bottom: 1.5rem; /* Ensure space below alerts */
 }

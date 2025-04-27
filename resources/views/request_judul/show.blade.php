@@ -1,23 +1,22 @@
-<link href="{{ asset('css/reqjudul.css') }}" rel="stylesheet">
+    @extends('layouts.utama')
 
-@extends('layouts.utama')
+    @section('title', 'Detail Request Judul')
 
-@section('title', 'Detail Request Judul')
+    <link href="{{ asset('css/reqjudul.css') }}" rel="stylesheet">
 
-@section('content')
-<div class="container">
-    <h1 style="color: black">Detail Request Judul</h1>
-<div class="container" padding="10px">
+    @section('content')
+
+    <div class="container" padding="10px">
     <h1>Detail Request Judul</h1>
 
     <div class="card">
-        <div style="color: black" class="card-header">
+        <div class="card-header">
             Request oleh: {{ $requestJudul->mahasiswa->name ?? 'N/A' }}
         </div>
         <div class="card-body">
             <dl class="row">
-                <dt style="color: black" class="col-sm-3">Judul Diajukan</dt>
-                <dd style="color: black" class="col-sm-9">{{ $requestJudul->judul }}</dd>
+                <dt>Judul Diajukan</dt>
+                <dd>{{ $requestJudul->judul }}</dd>
 
                 <dt style="color: black" class="col-sm-3">Dosen Pembimbing Dituju</dt>
                 <dd style="color: black" class="col-sm-9">{{ $requestJudul->dosen->name ?? 'N/A' }}</dd>
