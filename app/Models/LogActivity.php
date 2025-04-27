@@ -14,7 +14,7 @@ class LogActivity extends Model
      *
      * @var string
      */
-    protected $table = 'log_activity';
+    protected $table = 'log_activities';
 
     /**
      * Timestamps configuration

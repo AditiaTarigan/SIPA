@@ -10,7 +10,7 @@ use App\Http\Controllers\HistoryController;
 // Commented out controllers - uncomment when needed
 // use App\Http\Controllers\JudulController;
 // use App\Http\Controllers\BimbinganController;
-// use App\Http\Controllers\LogActivityController;
+use App\Http\Controllers\LogActivityController;
 // use App\Http\Controllers\CatatanController;
 // use App\Http\Controllers\ChatController;
 use App\Http\Controllers\DokumenController;
@@ -77,6 +77,8 @@ Route::middleware(['auth'])->group(function () {
     // - request-bimbingan.update (PUT/PATCH)
     // - request-bimbingan.destroy (DELETE)
     Route::resource('request-bimbingan', RequestBimbinganController::class);
+
+    Route::resource('log_activities', LogActivityController::class);
 
     // --- Other Potential Resource Routes (Uncomment when ready) ---
     // Route::resource('judul', JudulController::class)->middleware('role:admin,dosen'); // Example with role restriction
