@@ -65,7 +65,7 @@
                     <span class="tooltip">Ajukan Bimbingan</span>
                 </li>
                  <li> {{-- Ganti # dgn route yg benar --}}
-                    <a href="#">
+                    <a href="{{ route('log_activities.index') }}">
                         <span class="icon fa fa-file-upload"></span><span class="item-name">Log Activity</span>
                     </a>
                     <span class="tooltip">Aktivitas Ku</span>
