@@ -6,13 +6,15 @@
     border-radius: 2rem; /* Slightly rounded corners for the container */
     margin-top: -1rem; /* Space above the container */
     margin-bottom: 2rem; /* Space below the container */
-
 }
 
-
-h1, h2, h3 {
-    color: blue !important;
+.request-judul-header {
+    padding-top: 3rem;
+    padding-right: 2rem;
+    padding-left: 2rem;
+    padding-bottom: -2rem;
 }
+
 
 dt.col-sm-3 {
     color: black;
@@ -67,12 +69,6 @@ form a.btn-secondary {
 }
 
 
-/* Table (index.blade.php) */
-.table {
-    margin-top: 1rem; /* Space above the table */
-    border: 1px solid #000000; /* Add a border around the table */
-
-}
 
 .table thead tr {
     background-color: #0080ff; /* Light grey background for header */

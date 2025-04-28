@@ -154,7 +154,7 @@ aside.app-sidebar .menu-items a {
   overflow: hidden;
   border-radius: 5px; /* Radius sudut link */
   transition: background 0.2s ease, color 0.2s ease;
-  color: #adb5bd; /* Warna teks link default */
+  color: #ffffff; /* Warna teks link default */
   white-space: nowrap;
 }
 

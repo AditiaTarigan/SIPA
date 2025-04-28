@@ -1,4 +1,4 @@
-<link href="{{ asset('css/reqjudul.css') }}" rel="stylesheet">
+
 
 @extends('layouts.utama')
 

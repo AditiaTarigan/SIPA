@@ -49,13 +49,15 @@ Route::middleware(['auth'])->group(function () {
         }
     })->name('home'); // Give the home route a name
 
-    // --- Mahasiswa Specific Routes (Example) ---
-    // Consider adding role middleware here if needed: ->middleware('role:mahasiswa')
+    Route::get('/dosen', [DosenController::class,'index'])->name('dosen.index');
+    Route::get('/dosen/dashboard', [DosenController::class,'dashboard'])->name('dosen.dashboard');
+
     Route::resource('mahasiswa', MahasiswaController::class);
 
     Route::resource('history', HistoryController::class);
 
     Route::resource('dokumen', DokumenController::class);
+<<<<<<< HEAD
     
     // --- Dosen Specific Routes (Example) ---
     // Consider adding role middleware here if needed: ->middleware('role:dosen')
@@ -64,32 +66,15 @@ Route::middleware(['auth'])->group(function () {
 
     // --- CRUD Routes for Request Judul ---
     // Accessible by authenticated users (add role middleware if only specific roles can access)
+=======
+
+>>>>>>> b6e6a654c8c54f771db5db78aa236424f66f66d4
     Route::resource('request-judul', RequestJudulController::class);
 
-    // --- CRUD Routes for Request Bimbingan ---
-    // Accessible by authenticated users (add role middleware if only specific roles can access)
-    // This single line defines all necessary routes:
-    // - request-bimbingan.index (GET)
-    // - request-bimbingan.create (GET)
-    // - request-bimbingan.store (POST)
-    // - request-bimbingan.show (GET)
-    // - request-bimbingan.edit (GET)
-    // - request-bimbingan.update (PUT/PATCH)
-    // - request-bimbingan.destroy (DELETE)
     Route::resource('request-bimbingan', RequestBimbinganController::class);
 
     Route::resource('log_activities', LogActivityController::class);
 
-    // --- Other Potential Resource Routes (Uncomment when ready) ---
-    // Route::resource('judul', JudulController::class)->middleware('role:admin,dosen'); // Example with role restriction
-    // Route::resource('bimbingan', BimbinganController::class);
-    // Route::resource('catatan', CatatanController::class);
-    // Route::resource('log-activity', LogActivityController::class)->only(['index', 'show']); // Example: only index/show
-    // Route::resource('dokumen', DokumenController::class);
-    // Route::resource('chat', ChatController::class);
-
-    // --- Logout Route ---
-    // Place it here for logical grouping of authenticated actions
     Route::post('/logout', [SesiController::class,'logout'])->name('logout');
 
     // --- Example Admin Dashboard Route (define controller/view) ---
@@ -110,8 +95,3 @@ Route::get('/test-db', function () {
     }
 });
 
-
-// If you are using Laravel's built-in Auth scaffolding (like Breeze or Jetstream),
-// their routes might be included separately, often via:
-// require __DIR__.'/auth.php';
-// Make sure that file exists if you uncomment such a line.

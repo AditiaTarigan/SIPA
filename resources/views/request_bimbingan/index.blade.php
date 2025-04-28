@@ -1,4 +1,3 @@
-{{-- File: resources/views/request_bimbingan/index.blade.php --}}
 <link href="{{ asset('css/reqbim.css') }}" rel="stylesheet">
 
 @extends('layouts.utama') {{-- Use YOUR layout file --}}
@@ -6,20 +5,24 @@
 @section('title', 'Daftar Request Bimbingan') {{-- Change title if desired --}}
 
 @section('content')
-    <div class="d-flex justify-content-between align-items-center mb-3">
+<div class="card">
+    <div class="d-flex justify-content-between align-items-center mb-3 request-bimbingan-header">
+        {{-- Sesuaikan dengan layout yang Anda gunakan --}}
+        {{-- <h1 class="text-dark">Request Bimbingan</h1> --}}
+        {{-- Sesuaikan dengan layout yang Anda gunakan --}}
         <h1 colour="dark">Request Bimbingan</h1>
         {{-- Make sure the user role check is appropriate for who can create --}}
         @if(Auth::user()->role == 'mahasiswa')
-             <a href="{{ route('request-bimbingan.create') }}" class="btn btn-primary">Buat Request Baru</a>
+             <a href="{{ route('request-bimbingan.create') }}" class="btn btn-primary mb-3">Buat Request Baru</a>
         @endif
     </div>
 
     <div class="card">
-        <div class="card-header">Daftar Request</div>
-        <div class="card-body">
+        <div class="card-header">Daftar Request Bimbingan Sebelumnya</div>
+        <div class="card-body p-0">
             <div class="table-responsive">
-                <table class="table table-striped table-hover">
-                    <thead>
+           <table class="table table-striped table-hover table-bordered mb-0">
+            <thead>
                         <tr>
                             <th>No</th>
                             @if(Auth::user()->role != 'mahasiswa') {{-- Show student details if not a student view --}}
@@ -47,20 +50,17 @@
                                 <td>{{ $request->bimbingan_ke }}</td>
                                 <td>{{ $request->lokasi }}</td>
                                 <td>{{ Str::limit($request->tujuan_bimbingan, 50) }}</td>
-                                <td>
-                                    <a href="{{ route('request-bimbingan.show', $request->id) }}" class="btn btn-info btn-sm" title="Lihat Detail">
-                                        <i class="fa fa-eye"></i> {{-- Example using Font Awesome --}}
-                                    </a>
+                                <td class="text-center align-middle">
+                                    <a href="{{ route('request-bimbingan.show', $request->id) }}" class="btn btn-sm btn-info mb-1">Detail</a> {{-- mb-1 untuk sedikit jarak jika tombol wrap --}}
+
                                      {{-- Add authorization checks (e.g., using @can or policy) --}}
                                     @if(Auth::id() == $request->mahasiswa_id || Auth::user()->role == 'admin') {{-- Allow student owner or admin --}}
-                                        <a href="{{ route('request-bimbingan.edit', $request->id) }}" class="btn btn-warning btn-sm" title="Edit">
-                                             <i class="fa fa-edit"></i>
-                                        </a>
+                                    <a href="{{ route('request-bimbingan.edit', $request->id) }}" class="btn btn-sm btn-warning mb-1">Edit</a>
+
                                         <form action="{{ route('request-bimbingan.destroy', $request->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus request ini?');">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm" title="Hapus">
-                                                <i class="fa fa-trash"></i>
+                                            <button type="submit" class="btn btn-sm btn-danger mb-1" onclick="return confirm('Yakin ingin menghapus request ini?')">Hapus</button>
                                             </button>
                                         </form>
                                     @endif
@@ -78,13 +78,7 @@
                 </table>
             </div>
         </div>
-         <div class="card-footer">
-             {{-- Pagination Links --}}
-            @if ($requestBimbingans->hasPages())
-                {{ $requestBimbingans->links() }}
-            @endif
-        </div>
     </div>
-
+</div>
 
 @endsection
