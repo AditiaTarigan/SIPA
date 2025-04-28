@@ -2,8 +2,6 @@
 
     @section('title', 'Detail Request Judul')
 
-    <link href="{{ asset('css/reqjudul.css') }}" rel="stylesheet">
-
     @section('content')
 
     <div class="container" padding="10px">

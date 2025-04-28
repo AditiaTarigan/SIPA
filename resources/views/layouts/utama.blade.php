@@ -28,16 +28,7 @@
 </head>
 <body > {{-- JS akan menambah class 'collapsed' di sini --}}
 
-    {{-- Header Aplikasi (Fixed) --}}
-    <header class="app-header shadow-sm"> {{-- Tambahkan kelas app-header --}}
-        {{-- Isi header Anda (misal: logo kecil, user dropdown, notifikasi) --}}
-        {{-- Contoh sederhana: --}}
-        <div class="container-fluid h-100 d-flex align-items-center justify-content-end">
-             {{-- Placeholder untuk user info/logout di header --}}
-             <span class="text-white me-3">Selamat Datang, {{ Auth::user()->name ?? 'Tamu' }}</span>
-             {{-- Bisa tambahkan dropdown logout di sini --}}
-        </div>
-    </header>
+    @include('layouts.header') <!-- Menampilkan Sidebar -->
 
         {{-- Bootstrap Bundle JS --}}
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
@@ -112,9 +103,6 @@
         {{-- Konten Utama Aplikasi --}}
         {{-- Hapus class="container" dari sini --}}
         <main class="app-content"> {{-- Tambahkan kelas app-content --}}
-
-            {{-- PINDAHKAN Pesan & Flash Messages ke SINI --}}
-            @include('komponen.pesan')
 
             @if (session('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">

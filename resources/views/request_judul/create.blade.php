@@ -1,11 +1,10 @@
 {{-- resources/views/request_judul/create.blade.php --}}
-<link href="{{ asset('css/reqjudul.css') }}" rel="stylesheet">
 
 @extends('layouts.utama')
 
  @section('content')
 <div class="container">
-    <h2>Ajukan Judul Skripsi Baru</h2>
+    <h2w>Ajukan Judul Skripsi Baru</h2>
 
     {{-- Tampilkan error validasi jika ada --}}
     @if ($errors->any())
