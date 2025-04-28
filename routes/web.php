@@ -56,7 +56,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('history', HistoryController::class);
 
     Route::resource('dokumen', DokumenController::class);
-
+    
     // --- Dosen Specific Routes (Example) ---
     // Consider adding role middleware here if needed: ->middleware('role:dosen')
     Route::get('/dosen', [DosenController::class,'index'])->name('dosen.index');
