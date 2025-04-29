@@ -55,14 +55,6 @@ form a.btn {
     min-width: 80px; /* Minimum width for consistency */
 }
 
-form a.btn-secondary {
-    /* Optional: slightly different style for cancel */
-}
-
-/* Invalid feedback styling (Bootstrap default is usually good) */
-.is-invalid {
-    /* border-color: #dc3545; */ /* Default red */
-}
 .invalid-feedback {
     /* color: #dc3545; */ /* Default red */
     font-size: 0.875em;
