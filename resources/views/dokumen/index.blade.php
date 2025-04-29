@@ -32,6 +32,8 @@
                 <table class="table table-bordered table-striped" id="dataTableDokumen" width="100%" cellspacing="0">
                     <thead>
                         <tr>
+                            {{-- TAMBAHKAN KOLOM NOMOR DI SINI --}}
+                            <th>Nomor</th>
                             <th>Nama</th>
                             <th>Prodi</th>
                             <th>Nomor Kelompok</th>
@@ -41,15 +43,18 @@
                     </thead>
                     <tbody>
                         {{-- Menggunakan @forelse untuk menangani jika $dokumens kosong --}}
-                        @forelse ($dokumens as $dokumen)  {{-- Tetap menggunakan $dokumens dan $dokumen --}}
+                        @forelse ($dokumens as $dokumen)
                         <tr>
+                            {{-- TAMBAHKAN SEL DATA UNTUK NOMOR (ID) DI SINI --}}
+                            <td>{{ $dokumen->id ?? '-' }}</td> {{-- Menampilkan ID Dokumen --}}
+
                             {{-- Pastikan objek $dokumen memiliki properti ini --}}
                             <td>{{ $dokumen->nama ?? '-' }}</td>
                             <td>{{ $dokumen->prodi ?? '-' }}</td>
                             <td>{{ $dokumen->nomor_kelompok ?? '-' }}</td>
                             <td>{{ $dokumen->dokumen ?? '-' }}</td> {{-- Sesuaikan jika ini nama file atau path --}}
                             <td>
-                                {{-- Pastikan route 'submit_dokumen.edit' dan 'submit_dokumen.show' ada --}}
+                                {{-- Pastikan route 'dokumen.edit', 'dokumen.show', 'dokumen.destroy' ada di web.php --}}
                                 {{-- Tambahkan title untuk tooltip dan ikon jika diinginkan --}}
                                 <a href="{{ route('dokumen.edit', $dokumen->id) }}" class="btn btn-sm btn-warning" title="Edit">
                                     <i class="fas fa-edit"></i> Edit {{-- Hapus ikon jika tidak pakai FontAwesome --}}
@@ -70,8 +75,8 @@
                         @empty
                         {{-- Tampilan jika $dokumens kosong --}}
                         <tr>
-                            {{-- Colspan harus sesuai jumlah kolom (ada 5 kolom) --}}
-                            <td colspan="5" class="text-center">Belum ada data dokumen yang disubmit.</td>
+                            {{-- Colspan harus sesuai jumlah kolom (sekarang ada 6 kolom: Nomor, Nama, Prodi, NK, Nama Dokumen, Aksi) --}}
+                            <td colspan="6" class="text-center">Belum ada data dokumen yang disubmit.</td>
                         </tr>
                         @endforelse
                     </tbody>

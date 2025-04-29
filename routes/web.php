@@ -57,8 +57,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('history', HistoryController::class);
 
     Route::resource('dokumen', DokumenController::class);
-<<<<<<< HEAD
-    
+
+
     // --- Dosen Specific Routes (Example) ---
     // Consider adding role middleware here if needed: ->middleware('role:dosen')
     Route::get('/dosen', [DosenController::class,'index'])->name('dosen.index');
@@ -66,9 +66,7 @@ Route::middleware(['auth'])->group(function () {
 
     // --- CRUD Routes for Request Judul ---
     // Accessible by authenticated users (add role middleware if only specific roles can access)
-=======
 
->>>>>>> b6e6a654c8c54f771db5db78aa236424f66f66d4
     Route::resource('request-judul', RequestJudulController::class);
 
     Route::resource('request-bimbingan', RequestBimbinganController::class);
