@@ -1,143 +1,149 @@
+/* style.css - Contoh CSS Manual (Jika TIDAK pakai Tailwind) */
+
+/* Container dan Card */
 .container {
-    padding-left: 20rem;;
-    padding-top: 2%; /* Add some space at the top */
-    padding-bottom: 2rem; /* Add some space at the bottom */
-    background-color: #ffffff; /* White background for content area */
-    border-radius: 2rem; /* Slightly rounded corners for the container */
-    margin-top: -1rem; /* Space above the container */
-    margin-bottom: 2rem; /* Space below the container */
-}
-
-.request-judul-header {
-    padding-top: 3rem;
-    padding-right: 2rem;
-    padding-left: 2rem;
-    padding-bottom: -2rem;
-}
-
-
-dt.col-sm-3 {
-    color: black;
+    max-width: 1280px; /* Contoh */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2rem 1rem; /* px-4 py-8 */
   }
 
-dd {
-    color: #000;
-}
+  .card {
+    background-color: #ffffff;
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+    overflow: hidden;
+  }
 
-.class-card-header {
-    color: #000;
-}
+  .card-header {
+    padding: 1rem 1.5rem; /* px-6 py-4 */
+    border-bottom: 1px solid #e5e7eb; /* border-b border-gray-200 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-/* Forms (create.blade.php, edit.blade.php) */
-form {
-    margin-top: 1.5rem; /* Space above the form */
-}
+  .card-title {
+    font-size: 1.875rem; /* text-3xl */
+    font-weight: 600; /* font-semibold */
+    color: #1f2937; /* text-gray-800 */
+  }
 
-.form-label {
-    font-weight: 500; /* Slightly bolder labels */
-    margin-bottom: 0.5rem;
-}
+  .card-body {
+    padding: 1.5rem; /* p-6 */
+    background-color: #f9fafb; /* bg-gray-50 */
+  }
 
-.form-control,
-.form-select {
-    border-radius: 0.375rem; /* Standard Bootstrap radius */
-}
+  .body-title {
+      font-size: 1.25rem; /* text-xl */
+      font-weight: 500; /* font-medium */
+      color: #374151; /* text-gray-700 */
+      margin-bottom: 1rem; /* mb-4 */
+  }
 
-/* Add extra space below the last form group before the buttons */
-form > .mb-3:last-of-type {
-    margin-bottom: 2rem !important;
-}
+  /* Tombol Utama */
+  .btn {
+    display: inline-block;
+    font-weight: 700; /* font-bold */
+    padding: 0.5rem 1rem; /* py-2 px-4 */
+    border-radius: 0.25rem; /* rounded */
+    color: #ffffff;
+    text-decoration: none;
+    transition: background-color 0.15s ease-in-out;
+  }
 
-/* Style form action buttons */
-form button[type="submit"],
-form a.btn {
-    margin-right: 0.5rem; /* Space between buttons */
-    min-width: 80px; /* Minimum width for consistency */
-}
+  .btn-primary {
+    background-color: #3b82f6; /* bg-blue-500 */
+  }
+  .btn-primary:hover {
+    background-color: #2563eb; /* hover:bg-blue-600 */
+  }
 
-.invalid-feedback {
-    /* color: #dc3545; */ /* Default red */
-    font-size: 0.875em;
-}
+  /* Tabel */
+  .table-wrapper {
+      overflow-x: auto;
+      position: relative;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+      border-radius: 0.5rem; /* sm:rounded-lg */
+  }
 
+  .table {
+    width: 100%;
+    font-size: 0.875rem; /* text-sm */
+    text-align: left;
+    color: #4b5563; /* text-gray-600 */
+  }
 
+  .table thead {
+    font-size: 0.75rem; /* text-xs */
+    text-transform: uppercase;
+    color: #ffffff; /* text-white */
+    background-color: #2563eb; /* bg-blue-600 */
+  }
 
-.table thead tr {
-    background-color: #0080ff; /* Light grey background for header */
-    color: #ffffff; /* Darker text for header */
-    vertical-align: middle; /* Align header text vertically */
-    font-weight: 600; /* Bolder header text */
-    border-bottom-width: 2px; /* Thicker bottom border for header */
-    border-radius: 10rem;
-}
+  .table th,
+  .table td {
+    padding: 0.75rem 1.5rem; /* py-3 px-6 */
+  }
 
-.table tbody td {
-    vertical-align: middle; /* Align cell content vertically */
-    border-right: 10rem;
-}
+  .table tbody tr {
+    background-color: #ffffff; /* bg-white */
+    border-bottom: 1px solid #e5e7eb; /* border-b */
+  }
+  .table tbody tr:hover {
+    background-color: #f9fafb; /* hover:bg-gray-50 */
+  }
 
-/* Style table action buttons */
-.table td .btn {
-    padding: 0.25rem 0.5rem; /* Smaller padding for table buttons */
-    font-size: 0.875rem; /* Smaller font size */
-    margin: 2px 3px; /* Add small spacing around buttons */
-}
+  .table td a {
+      color: #2563eb; /* text-blue-600 */
+  }
+  .table td a:hover {
+      text-decoration: underline; /* hover:underline */
+  }
 
-.table td form {
-    display: inline-block; /* Keep form buttons inline */
-    margin: 0;
-}
+  /* Tombol Aksi di Tabel */
+  .btn-action {
+      display: inline-block;
+      font-size: 0.75rem; /* text-xs */
+      font-weight: 700; /* font-bold */
+      padding: 0.25rem 0.75rem; /* py-1 px-3 */
+      border-radius: 0.25rem; /* rounded */
+      color: #ffffff;
+      margin-right: 0.25rem; /* mr-1 */
+      transition: background-color 0.15s ease-in-out;
+      cursor: pointer;
+      border: none; /* Untuk tombol submit form */
+  }
 
-/* Status Badges (Bootstrap handles colors well, just ensure contrast) */
-.badge {
-    font-size: 0.85em; /* Slightly larger badge text */
-    padding: 0.4em 0.6em;
-}
+  .btn-view {
+      background-color: #06b6d4; /* bg-cyan-500 */
+  }
+  .btn-view:hover {
+      background-color: #0891b2; /* hover:bg-cyan-600 */
+  }
 
-.badge.bg-warning.text-dark {
-    color: #000 !important; /* Ensure black text on yellow for contrast */
-}
+  .btn-edit {
+      background-color: #f59e0b; /* bg-yellow-500 */
+  }
+  .btn-edit:hover {
+      background-color: #d97706; /* hover:bg-yellow-600 */
+  }
 
-/* Pagination (index.blade.php) */
-.pagination {
-    margin-top: 2rem; /* Space above pagination */
-    justify-content: center; /* Center pagination */
-}
+  .btn-delete {
+      background-color: #ef4444; /* bg-red-500 */
+  }
+  .btn-delete:hover {
+      background-color: #dc2626; /* hover:bg-red-600 */
+  }
 
+  /* Untuk form inline tombol delete */
+  .inline-form {
+      display: inline-block;
+  }
 
-
-/* Detail View Card (show.blade.php) */
-.card {
-    margin-top: 1.5rem;
-    border: 1px solid #dee2e6; /* Standard border */
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04); /* Softer shadow for cards */
-}
-
-.card-header {
-    background-color: #f8f9fa; /* Light header */
-    font-weight: 500;
-    border-bottom: 1px solid #dee2e6;
-}
-
-.dl-row dt { /* Targeting Bootstrap 5 definition list columns */
-    font-weight: 600; /* Bolder definition term */
-    color: #495057;
-}
-
-.dl-row dd {
-    margin-bottom: 0.75rem; /* Space below definition description */
-    color: #6c757d; /* Slightly lighter text for description */
-}
-
-.dl-row dd:last-of-type {
-    margin-bottom: 0; /* No margin on the last description */
-}
-
-.card-footer {
-    background-color: #f8f9fa; /* Light footer */
-    border-top: 1px solid #dee2e6;
-}
-
-.card-footer .btn {
-    margin-left: 0.5rem; /* Space between buttons in footer */
-}
+  /* Untuk spasi antar baris di tanggal submit */
+  td br {
+      display: block; /* Memastikan <br> berfungsi */
+      content: "";
+      margin-top: 0.25rem; /* Jarak kecil antar baris */
+  }
