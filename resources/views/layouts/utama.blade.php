@@ -47,7 +47,7 @@
             <ul class="menu-items">
                 {{-- Class 'active' bisa ditambahkan secara dinamis berdasarkan route --}}
                 <li class="{{ request()->routeIs('mahasiswa.index') ? 'active' : '' }}">
-                    <a href="{{ route('mahasiswa.index') }}">
+                    <a href="{{ route('Dosen.Dashboard') }}">
                         <span class="icon fa fa-house"></span><span class="item-name">Home</span>
                     </a>
                     <span class="tooltip">Home</span>

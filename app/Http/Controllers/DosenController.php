@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class DosenController extends Controller
 {
-    function index(){
-        return view ('dashboard.dosen');
+    function dashboard(){
+        return view ('Dosen.Dashboard');
       }
 }
