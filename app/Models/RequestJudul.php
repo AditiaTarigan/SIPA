@@ -30,6 +30,11 @@ class RequestJudul extends Model
      */
     protected $fillable = [
         'mahasiswa_id',
+        'nim',
+        'nama',
+        'prodi',
+        'tahun_angkatan',
+        'no_kelompok',
         'dosen_id',
         'judul',
         'deskripsi',
@@ -43,6 +48,7 @@ class RequestJudul extends Model
      */
     protected $casts = [
         'created_at' => 'datetime',
+        'tahun_angkatan' => 'integer', // YEAR can be treated as integer
     ];
 
     /**

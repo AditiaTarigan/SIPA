@@ -4,7 +4,7 @@
 
  @section('content')
 <div class="container">
-    <h2w>Ajukan Judul Skripsi Baru</h2>
+    <h2w>Ajukan Judul Proyek Akhir</h2>
 
     {{-- Tampilkan error validasi jika ada --}}
     @if ($errors->any())
@@ -19,6 +19,14 @@
 
     <form action="{{ route('request-judul.store') }}" method="POST">
         @csrf {{-- Token CSRF Wajib untuk form POST --}}
+
+        <div class="mb-3">
+            <label for="no_kelompok" class="form-label">Nomor Kelompok (Optional)</label>
+            <input type="text" class="form-control @error('no_kelompok') is-invalid @enderror" id="no_kelompok" name="no_kelompok" value="{{ old('no_kelompok') }}">
+             @error('no_kelompok')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
 
         <div class="mb-3">
             <label style="color: black" for="judul" class="form-label">Judul yang Diajukan</label>

@@ -50,7 +50,6 @@ Route::middleware(['auth'])->group(function () {
     })->name('home'); // Give the home route a name
 
     Route::get('/dosen', [DosenController::class,'index'])->name('dosen.index');
-    Route::get('/dosen/dashboard', [DosenController::class,'dashboard'])->name('dosen.dashboard');
 
     Route::resource('mahasiswa', MahasiswaController::class);
 
@@ -61,6 +60,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('request-judul', RequestJudulController::class);
 
     Route::resource('request-bimbingan', RequestBimbinganController::class);
+
+    Route::resource('history', HistoryController::class);
 
     Route::resource('log_activities', LogActivityController::class);
 

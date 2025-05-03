@@ -13,7 +13,7 @@
         <h1 colour="dark">Request Bimbingan</h1>
         {{-- Make sure the user role check is appropriate for who can create --}}
         @if(Auth::user()->role == 'mahasiswa')
-             <a href="{{ route('request-bimbingan.create') }}" class="btn btn-primary mb-3">Buat Request Baru</a>
+            <a href="{{ route('request-bimbingan.create') }}" class="btn btn-primary mb-3">Ajukan Bimbingan Baru</a>
         @endif
     </div>
 
@@ -21,27 +21,27 @@
         <div class="card-header">Daftar Request Bimbingan Sebelumnya</div>
         <div class="card-body p-0">
             <div class="table-responsive">
-           <table class="table table-striped table-hover table-bordered mb-0">
+        <table class="table table-striped table-hover table-bordered mb-0">
             <thead>
                         <tr>
-                            <th>No</th>
+                            <th class="text-center">No</th>
                             @if(Auth::user()->role != 'mahasiswa') {{-- Show student details if not a student view --}}
                                 <th>NIM</th>
                                 <th>Nama Mahasiswa</th>
                             @endif
-                            <th>Tanggal</th>
-                            <th>Jam</th>
-                            <th>Bimbingan Ke</th>
-                            <th>Lokasi</th>
-                            <th>Tujuan Singkat</th>
-                            <th>Aksi</th>
+                            <th class="text-center">Tanggal</th>
+                            <th class="text-center">Jam</th>
+                            <th class="text-center">Bimbingan Ke</th>
+                            <th class="text-center">Lokasi</th>
+                            <th class="text-center">Tujuan Singkat</th>
+                            <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($requestBimbingans as $index => $request)
                             <tr>
                                 <td>{{ $requestBimbingans->firstItem() + $index }}</td> {{-- Pagination numbering --}}
-                                 @if(Auth::user()->role != 'mahasiswa')
+                                @if(Auth::user()->role != 'mahasiswa')
                                     <td>{{ $request->nim }}</td>
                                     <td>{{ $request->nama }}</td> {{-- Or $request->mahasiswa->name --}}
                                 @endif
@@ -51,10 +51,10 @@
                                 <td>{{ $request->lokasi }}</td>
                                 <td>{{ Str::limit($request->tujuan_bimbingan, 50) }}</td>
                                 <td class="text-center align-middle">
-                                    <a href="{{ route('request-bimbingan.show', $request->id) }}" class="btn btn-sm btn-info mb-1">Detail</a> {{-- mb-1 untuk sedikit jarak jika tombol wrap --}}
 
-                                     {{-- Add authorization checks (e.g., using @can or policy) --}}
+                                    {{-- Add authorization checks (e.g., using @can or policy) --}}
                                     @if(Auth::id() == $request->mahasiswa_id || Auth::user()->role == 'admin') {{-- Allow student owner or admin --}}
+                                <a href="{{ route('request-bimbingan.show', $request->id) }}" class="btn btn-sm btn-info mb-1">Detail</a>
                                     <a href="{{ route('request-bimbingan.edit', $request->id) }}" class="btn btn-sm btn-warning mb-1">Edit</a>
 
                                         <form action="{{ route('request-bimbingan.destroy', $request->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus request ini?');">
@@ -64,7 +64,7 @@
                                             </button>
                                         </form>
                                     @endif
-                                     {{-- Add actions for Dosen (approve/reject) later --}}
+                                    {{-- Add actions for Dosen (approve/reject) later --}}
 
                                 </td>
                             </tr>

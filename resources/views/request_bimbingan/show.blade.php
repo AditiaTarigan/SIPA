@@ -9,45 +9,45 @@
 
     <div class="card">
         <div class="card-header">
-            Request #{{ $requestBimbingan->id }}
+            Request {{ $requestBimbingan->id }}
         </div>
         <div class="card-body">
             <dl class="row">
                 <dt class="col-sm-3">NIM</dt>
-                <dd class="col-sm-9">{{ $requestBimbingan->nim }}</dd>
+                <dd class="col-sm-9">: {{ $requestBimbingan->nim }}</dd>
 
                 <dt class="col-sm-3">Nama Mahasiswa</dt>
-                <dd class="col-sm-9">{{ $requestBimbingan->nama }}</dd>
+                <dd class="col-sm-9">: {{ $requestBimbingan->nama }}</dd>
 
                 <dt class="col-sm-3">Program Studi</dt>
-                <dd class="col-sm-9">{{ $requestBimbingan->prodi }}</dd>
+                <dd class="col-sm-9">: {{ $requestBimbingan->prodi }}</dd>
 
                  <dt class="col-sm-3">Tahun Angkatan</dt>
-                <dd class="col-sm-9">{{ $requestBimbingan->tahun_angkatan }}</dd>
+                <dd class="col-sm-9">: {{ $requestBimbingan->tahun_angkatan }}</dd>
 
                 <dt class="col-sm-3">No Kelompok</dt>
-                <dd class="col-sm-9">{{ $requestBimbingan->no_kelompok ?? '-' }}</dd>
+                <dd class="col-sm-9">: {{ $requestBimbingan->no_kelompok ?? '-' }}</dd>
 
                 <dt class="col-sm-3">Tanggal Bimbingan</dt>
-                <dd class="col-sm-9">{{ $requestBimbingan->tanggal_bimbingan->format('d F Y') }}</dd>
+                <dd class="col-sm-9">: {{ $requestBimbingan->tanggal_bimbingan->format('d F Y') }}</dd>
 
                 <dt class="col-sm-3">Jam Bimbingan</dt>
-                <dd class="col-sm-9">{{ \Carbon\Carbon::parse($requestBimbingan->jam_bimbingan)->format('H:i') }}</dd>
+                <dd class="col-sm-9">: {{ \Carbon\Carbon::parse($requestBimbingan->jam_bimbingan)->format('H:i') }}</dd>
 
                 <dt class="col-sm-3">Bimbingan Ke</dt>
-                <dd class="col-sm-9">{{ $requestBimbingan->bimbingan_ke }}</dd>
+                <dd class="col-sm-9">: {{ $requestBimbingan->bimbingan_ke }}</dd>
 
                 <dt class="col-sm-3">Lokasi</dt>
-                <dd class="col-sm-9">{{ $requestBimbingan->lokasi }}</dd>
+                <dd class="col-sm-9">: {{ $requestBimbingan->lokasi }}</dd>
 
                  <dt class="col-sm-3">Tujuan Bimbingan</dt>
-                <dd class="col-sm-9">{{ nl2br(e($requestBimbingan->tujuan_bimbingan)) }}</dd>
+                <dd class="col-sm-9">: {{ nl2br(e($requestBimbingan->tujuan_bimbingan)) }}</dd>
 
                  <dt class="col-sm-3">Requested At</dt>
-                 <dd class="col-sm-9">{{ $requestBimbingan->created_at->format('d M Y H:i:s') }}</dd>
+                 <dd class="col-sm-9">: {{ $requestBimbingan->created_at->format('d M Y H:i:s') }}</dd>
 
                  <dt class="col-sm-3">Status (Placeholder)</dt>
-                 <dd class="col-sm-9"><span class="badge bg-warning">Pending</span></dd> {{-- Add actual status logic later --}}
+                 <dd class="col-sm-9">: <span class="badge bg-warning">Pending</span></dd> {{-- Add actual status logic later --}}
             </dl>
         </div>
         <div class="card-footer">

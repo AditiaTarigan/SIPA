@@ -16,6 +16,7 @@
     {{-- Sidebar CSS Anda --}}
     <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
 
+
     <!-- Font Awesome (jika belum diimport di sidebar.css) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -38,7 +39,7 @@
 
         {{-- Sidebar Aplikasi (Fixed) --}}
         <aside class="app-sidebar"> {{-- Tambahkan kelas app-sidebar --}}
-            <button class="menu-btn fa fa-chevron-left"></button>
+            <button class="menu-btn fas fa-chevron-left"></button>
             <a href="/" class="logo-wrapper">
                 <img src="{{ asset('foto/del.png') }}" alt="logo">
                 <span class="brand-name">SISTEM INFORMASI <br> PROJECT AKHIR</span>
@@ -150,16 +151,16 @@
             menuBtn.addEventListener("click", (e) => {
                 document.body.classList.toggle("collapsed");
                 // Toggle class icon langsung
-                e.currentTarget.classList.toggle("fa-chevron-right");
-                e.currentTarget.classList.toggle("fa-chevron-left");
+                e.currentTarget.classList.toggle("fas-chevron-right");
+                e.currentTarget.classList.toggle("fas-chevron-left");
             });
 
             // Optional: Cek localStorage untuk menyimpan state sidebar
             const sidebarState = localStorage.getItem('sidebarCollapsed');
             if (sidebarState === 'true') {
                 document.body.classList.add('collapsed');
-                menuBtn.classList.remove('fa-chevron-left');
-                menuBtn.classList.add('fa-chevron-right');
+                menuBtn.classList.remove('fas-chevron-left');
+                menuBtn.classList.add('fas-chevron-right');
             }
 
             // Simpan state saat diubah

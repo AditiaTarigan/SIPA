@@ -54,28 +54,45 @@ class RequestJudulController extends Controller
      * Menyimpan request judul baru ke database.
      */
     public function store(Request $request)
-    {
-         // Pastikan hanya mahasiswa yang bisa store
-         $this->authorize('create', RequestJudul::class); // User harus bisa create
+{
+    // Pastikan hanya mahasiswa yang bisa store
+    $this->authorize('create', RequestJudul::class);
 
-
-        // Validasi input
-        $validated = $request->validate([
-            'judul' => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
-            'dosen_id' => 'required|integer|exists:users,id,role,dosen', // Pastikan dosen_id ada di tabel users dan rolenya dosen
-        ]);
-
-        // Tambahkan mahasiswa_id dari user yang sedang login
-        $validated['mahasiswa_id'] = Auth::id();
-
-        // Buat record baru
-        RequestJudul::create($validated);
-
-        return redirect()->route('request-judul.index')
-                         ->with('success', 'Request judul berhasil diajukan.'); // Pesan sukses
+    // DAPATKAN USER YANG LOGIN DULU
+    $user = Auth::user();
+    // Periksa jika user tidak login (meskipun middleware auth harusnya menangani ini)
+    if (!$user) {
+        // Mungkin redirect ke login atau tampilkan error
+        abort(401, 'User tidak terautentikasi.');
+    }
+    // Pastikan user adalah mahasiswa (jika belum ditangani oleh authorize)
+    if ($user->role !== 'mahasiswa') {
+        abort(403, 'Hanya mahasiswa yang bisa membuat request.');
     }
 
+
+    // Validasi input
+    $validated = $request->validate([
+        'no_kelompok' => 'nullable|string|max:20',
+        'judul' => 'required|string|max:255',
+        'deskripsi' => 'nullable|string',
+        'dosen_id' => 'required|integer|exists:users,id,role,dosen',
+    ]);
+
+    // --- Prepare Data ---
+    $dataToSave = $validated;
+    $dataToSave['mahasiswa_id'] = $user->id; // Sekarang $user sudah ada
+    $dataToSave['nim'] = $user->nim;         // Sekarang $user sudah ada
+    $dataToSave['nama'] = $user->name;       // Sekarang $user sudah ada
+    $dataToSave['prodi'] = $user->prodi;     // Sekarang $user sudah ada
+    $dataToSave['tahun_angkatan'] = $user->tahun_angkatan; // Sekarang $user sudah ada
+
+    // Buat record baru
+    RequestJudul::create($dataToSave); // Gunakan $dataToSave yang sudah lengkap
+
+    return redirect()->route('request-judul.index')
+                     ->with('success', 'Request judul berhasil diajukan.');
+}
     /**
      * Menampilkan detail spesifik request judul.
      * Implementasi authorization disarankan (misal: Policy)

@@ -86,4 +86,5 @@ class HistoryController extends Controller
 
         return redirect()->to('history')->with('success', 'Berhasil menghapus data');
     }
+
 }

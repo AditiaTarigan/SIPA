@@ -22,6 +22,11 @@ class RequestJudulTableSeeder extends Seeder
         if ($mahasiswaUser1 && $dosenUser1) {
             RequestJudul::create([
                 'mahasiswa_id' => $mahasiswaUser1->id, // FK ke users.id
+                'nim' => $mahasiswaUser1->nim,
+                'nama' => $mahasiswaUser1->name,
+                'prodi' => $mahasiswaUser1->prodi,
+                'tahun_angkatan' => $mahasiswaUser1->angkatan,
+                'no_kelompok' => 'K01', // Contoh
                 'dosen_id' => $dosenUser1->id,       // FK ke users.id
                 'judul' => 'Implementasi Algoritma KNN untuk Klasifikasi Citra Batik',
                 'deskripsi' => 'Mengajukan judul terkait klasifikasi citra menggunakan K-Nearest Neighbors.',
@@ -32,6 +37,11 @@ class RequestJudulTableSeeder extends Seeder
         if ($mahasiswaUser2 && $dosenUser2) {
              RequestJudul::create([
                 'mahasiswa_id' => $mahasiswaUser2->id, // FK ke users.id
+                'nim' => $mahasiswaUser1->nim,
+                'nama' => $mahasiswaUser1->name,
+                'prodi' => $mahasiswaUser1->prodi,
+                'tahun_angkatan' => $mahasiswaUser1->angkatan,
+                'no_kelompok' => 'K02', // Contoh
                 'dosen_id' => $dosenUser2->id,       // FK ke users.id
                 'judul' => 'Pengembangan Sistem Informasi Akademik Berbasis Laravel dan Vue.js',
                 'deskripsi' => 'Pengajuan judul untuk membangun sistem informasi akademik.',

@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\HistoryBimbingan;
+
+
 
 class RequestBimbingan extends Model
 {
@@ -56,14 +59,9 @@ class RequestBimbingan extends Model
         'bimbingan_ke' => 'integer',
     ];
 
-
-    /**
-     * Get the user (mahasiswa) who made the request.
-     */
-    public function mahasiswa() // Or requester() or user()
+    public function mahasiswa()
     {
         // Belongs to one user (mahasiswa)
-        // FK is mahasiswa_id which references users.id
         return $this->belongsTo(User::class, 'mahasiswa_id');
     }
 }

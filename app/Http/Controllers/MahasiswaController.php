@@ -23,7 +23,7 @@ class MahasiswaController extends Controller
         }else{
             $data = mahasiswa::orderBy('nim','desc')->paginate($jumlahbaris);
         }
-        return view('mahasiswa.index')->with('data', $data);
+        return view('dashboard.mahasiswa')->with('data', $data);
     }
 
     /**

@@ -8,7 +8,7 @@
 :root {
   --menu-width: 260px; /* Sedikit lebih sempit mungkin? Sesuaikan */
   --collapsed-width: 70px; /* Lebar saat collapse */
-  --header-height: 60px; /* Tinggi header Anda */
+  --header-height: 70px; /* Tinggi header Anda */
 }
 
 body {
@@ -29,7 +29,7 @@ header.app-header { /* Beri kelas spesifik jika perlu */
   position: fixed;
   top: 0;
   left: 0; /* Pastikan menempel kiri */
-  z-index: 1030; /* Z-index header (di bawah sidebar jika sidebar overlay) */
+  z-index: 1031; /* Z-index header (di bawah sidebar jika sidebar overlay) */
   /* Tambahkan style lain jika perlu: display: flex, align-items, padding, etc. */
 }
 
@@ -40,8 +40,8 @@ aside.app-sidebar { /* Beri kelas spesifik */
   /* top: var(--header-height); */ /* OPSI: Jika ingin sidebar mulai DI BAWAH header */
   left: 0;
   width: var(--menu-width);
-  /* height: 100vh; */ /* Jika mulai dari atas */
-  height: calc(100vh - var(--header-height)); /* OPSI: Jika mulai di bawah header */
+  height: 100vh; /* Jika mulai dari atas */
+  /* height: calc(100vh - var(--header-height)); */ /* OPSI: Jika mulai di bawah header */
   background: #282c34;
   color: #adb5bd; /* Warna teks default sidebar */
   z-index: 1031; /* Z-index sidebar (di atas header jika menutupi) */
@@ -60,9 +60,9 @@ body.collapsed aside.app-sidebar {
 aside.app-sidebar .menu-btn {
   color: white;
   position: absolute;
-  top: 15px; /* Sesuaikan agar pas secara vertikal */
+  top: 20px; /* Sesuaikan agar pas secara vertikal */
   /* Jika sidebar mulai di bawah header, sesuaikan 'top' ini atau relatifkan ke parent */
-  right: -15px; /* Menonjol keluar */
+  right: -10px; /* Menonjol keluar */
   padding: 8px;
   border: none;
   font-size: 15px;
@@ -133,7 +133,7 @@ aside.app-sidebar .separator {
 
 /* --- Menu Items --- */
 aside.app-sidebar .menu-items {
-  margin-top: 10px;
+  margin-top: 10kpx;
   list-style: none;
   padding: 0 10px; /* Padding kiri-kanan untuk list */
   flex-grow: 1; /* Ambil sisa ruang */
