@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 
 class MahasiswaController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
@@ -23,7 +24,7 @@ class MahasiswaController extends Controller
         }else{
             $data = mahasiswa::orderBy('nim','desc')->paginate($jumlahbaris);
         }
-        return view('dashboard.mahasiswa')->with('data', $data);
+        return view('Mhs.Dashboard')->with('data', $data);
     }
 
     /**

@@ -1,4 +1,4 @@
-@extends('layouts.utama')
+@extends('layouts.utama') {{-- Ganti dengan nama layout Anda --}}
 
 {{-- Menyisipkan CSS --}}
 @push('styles')
@@ -7,6 +7,7 @@
     <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/main.min.css' rel='stylesheet' />
     {{-- Blok <style> dihapus dari sini --}}
 @endpush
+
 
 @section('content')
 <div class="dashboard-container">
@@ -104,7 +105,7 @@
 
     </div> {{-- End Main Content --}}
 
-     {{-- Kolom Sidebar Kanan --}}
+        {{-- Kolom Sidebar Kanan --}}
         <div class="col-md-4 right-sidebar"> {{-- Sesuaikan ukuran kolom --}}
             <div class="card calendar-card">
                 {{-- Header Kalender PHP/Carbon --}}
@@ -160,5 +161,4 @@
     {{-- Pastikan TIDAK ADA script FullCalendar.Calendar(...) di sini --}}
 
     {{-- Script lain yang mungkin Anda butuhkan --}}
-
 @endpush

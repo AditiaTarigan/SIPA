@@ -27,17 +27,18 @@
             <table class="table table-striped table-hover table-bordered mb-0">
                 <thead>
                             <tr>
-                                <th>No</th>
+                                <th class="text-center">No</th>
                                 @if(Auth::user()->role != 'mahasiswa') {{-- Show student details if not a student view --}}
-                                    <th>NIM</th>
-                                    <th>Nama Mahasiswa</th>
+                                    <th class="text-center">NIM</th>
+                                    <th class="text-center">Nama Mahasiswa</th>
                                 @endif
-                                <th>Tanggal</th>
-                                <th>Jam</th>
-                                <th>Bimbingan Ke</th>
-                                <th>Lokasi</th>
-                                <th>Tujuan Singkat</th>
-                                <th>Aksi</th>
+                                <th class="text-center">Tanggal</th>
+                                <th class="text-center">Jam</th>
+                                <th class="text-center">Bimbingan Ke</th>
+                                <th class="text-center">Lokasi</th>
+                                <th class="text-center">Tujuan Singkat</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -53,6 +54,20 @@
                                     <td>{{ $request->bimbingan_ke }}</td>
                                     <td>{{ $request->lokasi }}</td>
                                     <td>{{ Str::limit($request->tujuan_bimbingan, 50) }}</td>
+
+                                    {{-- === MODIFIKASI DI SINI === --}}
+                                    <td class="text-center align-middle">
+                                    {{-- Logika status (sesuaikan dengan kolom status di DB kamu) --}}
+                                    <span class="badge
+                                    @if ($request->status == 'Disetujui') bg-success
+                                    @elseif ($request->status == 'Ditolak') bg-danger
+                                    @else bg-warning text-dark {{-- Default: Pending --}}
+                                    @endif
+                                    ">
+                                    {{ $request->status ?? 'Pending' }} {{-- Tampilkan 'Pending' jika status null --}}
+                                    </span>
+                                    </td>
+
                                     <td class="text-center align-middle">
                                         <a href="{{ route('request-bimbingan.show', $request->id) }}" class="btn btn-sm btn-info mb-1">Detail</a> {{-- mb-1 untuk sedikit jarak jika tombol wrap --}}
 

@@ -33,7 +33,7 @@ class SesiController extends Controller
             if ($user->role == 'admin') {
                 return redirect()->route('Admin.Dashboard');
             } elseif ($user->role == 'mahasiswa') {
-                return redirect()->route('request-judul.index');
+                return redirect()->route('Mhs.Dashboard');
             } elseif ($user->role == 'dosen') {
                 return redirect()->route('Dosen.Dashboard');
             } else {
