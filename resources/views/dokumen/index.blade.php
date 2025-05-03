@@ -1,96 +1,104 @@
-{{-- Pastikan file CSS ini ada dan sesuai --}}
+{{-- Pastikan reqbim.css dimuat, idealnya di layouts.utama --}}
 <link href="{{ asset('css/reqbim.css') }}" rel="stylesheet">
 
-@extends('layouts.utama') {{-- Sesuaikan dengan nama layout utama Anda --}}
+@extends('layouts.utama') {{-- Layout tidak diubah --}}
+
+@section('title', 'Riwayat Submit Dokumen') {{-- Judul tidak diubah --}}
 
 @section('content')
-<div class="container py-4"> {{-- py-4 untuk padding atas-bawah --}}
+{{-- Container asli dipertahankan --}}
+<div class="container py-4">
 
-    {{-- Baris untuk Judul Halaman dan Tombol Tambah --}}
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        {{-- Judul utama halaman --}}
-        <h1 class="h3 mb-0 text-gray-800">Riwayat Submit Dokumen</h1>
+    {{-- 1. Outer Card Wrapper --}}
+    <div class="card">
 
-        {{-- Tombol Tambah Data --}}
-        {{-- Anda bisa menambahkan kondisi @if jika tombol ini tidak selalu tampil --}}
-        <a href="{{ url('dokumen/create') }}" class="btn btn-primary">
-             + Tambah Data
-        </a>
-        {{-- Alternatif jika punya named route: --}}
-        {{-- <a href="{{ route('dokumen.create') }}" class="btn btn-primary">+ Tambah Data</a> --}}
-    </div>
-
-    {{-- Card untuk membungkus tabel --}}
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            {{-- Judul di dalam card --}}
-            <h6 class="m-0 font-weight-bold text-primary">Daftar Dokumen Tersubmit</h6>
+        {{-- 2. Header Section (Inside card) --}}
+        <div class="px-4 py-3 border-bottom bg-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <h1 class="h3 mb-0 text-gray-800">Riwayat Submit Dokumen</h1>
+                <a href="{{ url('dokumen/create') }}" class="btn btn-primary">
+                     + Tambah Data
+                </a>
+            </div>
         </div>
-        <div class="card-body">
-            <div class="table-responsive"> {{-- Membuat tabel responsif --}}
-                {{-- Hapus <form> yang membungkus tabel jika tidak diperlukan --}}
-                <table class="table table-bordered table-striped" id="dataTableDokumen" width="100%" cellspacing="0">
+
+        {{-- 3. Content Area (Inside card, below header) --}}
+        <div class="p-4 bg-light">
+
+            {{-- 4. Sub-title untuk tabel --}}
+            <p class="mb-3 text-muted">Daftar Dokumen Tersubmit</p>
+
+            {{-- 5. Tabel --}}
+            <div class="table-responsive">
+                {{-- MODIFIKASI: Menghapus cellspacing dan menambah inline style --}}
+                <table class="table table-striped table-hover mb-0" id="dataTableDokumen" width="100%"
+                       style="border-collapse: separate; border-spacing: 1px;">
+                    {{-- thead akan di-style oleh reqbim.css --}}
                     <thead>
                         <tr>
-                            <th>Nama</th>
-                            <th>Prodi</th>
-                            <th>Nomor Kelompok</th>
-                            <th>Nama Dokumen</th> {{-- Mungkin maksudnya Nama File atau Keterangan? --}}
-                            <th>Aksi</th>
+                            <th class="text-center">No.</th>
+                            <th class="text-center">Nama</th>
+                            <th class="text-center">Prodi</th>
+                            <th class="text-center">Nomor Kelompok</th>
+                            <th class="text-center">Nama Dokumen</th>
+                            <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- Menggunakan @forelse untuk menangani jika $dokumens kosong --}}
-                        @forelse ($dokumens as $dokumen)  {{-- Tetap menggunakan $dokumens dan $dokumen --}}
+                        {{-- Loop forelse tidak diubah --}}
+                        @forelse ($dokumens as $dokumen)
                         <tr>
-                            {{-- Pastikan objek $dokumen memiliki properti ini --}}
+                            <td class="text-center">{{ $loop->iteration }}</td>
                             <td>{{ $dokumen->nama ?? '-' }}</td>
                             <td>{{ $dokumen->prodi ?? '-' }}</td>
                             <td>{{ $dokumen->nomor_kelompok ?? '-' }}</td>
-                            <td>{{ $dokumen->dokumen ?? '-' }}</td> {{-- Sesuaikan jika ini nama file atau path --}}
                             <td>
-                                {{-- Pastikan route 'submit_dokumen.edit' dan 'submit_dokumen.show' ada --}}
-                                {{-- Tambahkan title untuk tooltip dan ikon jika diinginkan --}}
-                                <a href="{{ route('dokumen.edit', $dokumen->id) }}" class="btn btn-sm btn-warning" title="Edit">
-                                    <i class="fas fa-edit"></i> Edit {{-- Hapus ikon jika tidak pakai FontAwesome --}}
+                                @if($dokumen->dokumen)
+                                <a href="{{ asset('storage/' . $dokumen->dokumen) }}" target="_blank">
+                                    {{ basename($dokumen->dokumen) }}
                                 </a>
-                                <a href="{{ route('dokumen.show', $dokumen->id) }}" class="btn btn-sm btn-info" title="Lihat">
-                                    <i class="fas fa-eye"></i> Lihat {{-- Hapus ikon jika tidak pakai FontAwesome --}}
+                                @else
+                                {{ basename($dokumen->dokumen) ?? '-' }}
+                                @endif
+                            </td>
+                            {{-- Kolom Aksi: Style nowrap dipertahankan --}}
+                            <td class="text-center align-middle" style="white-space: nowrap;">
+                                <a href="{{ route('dokumen.edit', $dokumen->id) }}" class="btn btn-sm btn-warning mb-1" title="Edit">
+                                    <i class="fas fa-edit"></i> Edit
                                 </a>
-                                {{-- Tambahkan tombol lain jika perlu (misal: Hapus) --}}
+                                <a href="{{ route('dokumen.show', $dokumen->id) }}" class="btn btn-sm btn-info mb-1" title="Lihat">
+                                    <i class="fas fa-eye"></i> Lihat
+                                </a>
                                 <form action="{{ route('dokumen.destroy', $dokumen->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger" title="Hapus">
+                                    <button type="submit" class="btn btn-sm btn-danger mb-1" title="Hapus">
                                         <i class="fas fa-trash"></i> Hapus
                                     </button>
                                 </form>
                             </td>
                         </tr>
                         @empty
-                        {{-- Tampilan jika $dokumens kosong --}}
                         <tr>
-                            {{-- Colspan harus sesuai jumlah kolom (ada 5 kolom) --}}
-                            <td colspan="5" class="text-center">Belum ada data dokumen yang disubmit.</td>
+                            <td colspan="7" class="text-center">Belum ada data dokumen yang disubmit.</td>
                         </tr>
                         @endforelse
                     </tbody>
                 </table>
+            </div> {{-- End .table-responsive --}}
+
+            {{-- 6. Pagination --}}
+            <div class="mt-3 d-flex justify-content-center mb-0">
+               {{-- {{ $dokumens->links() }} --}}
             </div>
 
-             {{-- Tampilkan link pagination jika menggunakan pagination pada $dokumens --}}
-             <div class="mt-3 d-flex justify-content-center">
-                {{-- Uncomment baris di bawah jika Anda mengirimkan data pagination dari controller ($dokumens = Model::paginate()) --}}
-                {{-- {{ $dokumens->links() }} --}}
-             </div>
+        </div> {{-- End .p-4 .bg-light --}}
+    </div> {{-- End .card --}}
 
-        </div> {{-- Akhir card-body --}}
-    </div> {{-- Akhir card --}}
-
-</div> {{-- Akhir container --}}
+</div> {{-- Akhir .container --}}
 @endsection
 
-{{-- Opsional: Push CSS/JS jika diperlukan --}}
+{{-- @push sections tidak diubah --}}
 @push('styles')
     {{-- <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet"> --}}
     <style>
@@ -98,15 +106,11 @@
         .btn-sm i { /* Contoh styling ikon di tombol kecil */
             margin-right: 3px;
         }
+        /* Anda mungkin perlu sedikit menyesuaikan padding sel jika border-spacing ditambahkan */
+        /* .table td, .table th { padding: 0.7rem; } */
     </style>
 @endpush
 
 @push('scripts')
-    {{-- <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script> --}}
-    {{-- <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script> --}}
-    {{-- <script> --}}
-    {{-- $(document).ready(function() { --}}
-    {{--     $('#dataTableDokumen').DataTable(); // Inisialisasi DataTables jika digunakan --}}
-    {{-- }); --}}
-    {{-- </script> --}}
+    {{-- Script tidak diubah --}}
 @endpush

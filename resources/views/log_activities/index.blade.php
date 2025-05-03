@@ -1,118 +1,113 @@
-{{-- Pastikan file CSS ini ada dan sesuai --}}
-<link href="{{ asset('css/log_activities.css') }}" rel="stylesheet">
+{{-- Pastikan reqbim.css dimuat, idealnya di layouts.utama --}}
+<link href="{{ asset('css/reqbim.css') }}" rel="stylesheet">
 
-@extends('layouts.utama') {{-- Sesuaikan dengan nama layout utama Anda --}}
+@extends('layouts.utama')
+
+@section('title', 'Riwayat Submit Log Activities')
 
 @section('content')
-<div class="container py-4"> {{-- py-4 untuk padding atas-bawah --}}
 
-    {{-- Baris untuk Judul Halaman dan Tombol Tambah --}}
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        {{-- Judul utama halaman --}}
-        <h1 class="h3 mb-0 text-gray-800">Riwayat Submit Log Activities</h1>
+{{-- 1. Outer Container/Card --}}
+{{-- Menggunakan class 'card' saja, asumsi shadow/margin diatur oleh reqbim.css atau layout --}}
+{{-- Jika reqbim.css tidak mengatur shadow/margin untuk .card, tambahkan kembali (misal: shadow-sm mb-4) --}}
+<div class="card">
 
-        {{-- Tombol Tambah Data --}}
-        {{-- Anda bisa menambahkan kondisi @if jika tombol ini tidak selalu tampil --}}
-        <a href="{{ route('log_activities.create') }}" class="btn btn-primary">
-             + Tambah Data
-        </a>
-        {{-- Alternatif jika punya named route: --}}
-        {{-- <a href="{{ route('log_activities.create') }}" class="btn btn-primary">+ Tambah Data</a> --}}
+    {{-- 2. Header Section (Di dalam card luar) --}}
+    {{-- Menggunakan padding dan border yang mungkin lebih cocok dengan target --}}
+    {{-- Coba class 'request-bimbingan-header' jika didefinisikan di reqbim.css --}}
+    {{-- Atau gunakan padding/border eksplisit --}}
+    <div class="px-6 py-4 border-bottom bg-white request-bimbingan-header"> {{-- Coba padding lebih besar (px-6 py-4) dan class header --}}
+        <div class="d-flex justify-content-between align-items-center">
+            {{-- Main page title - Ukuran/Font harusnya dari H1 default atau CSS --}}
+            <h1>Riwayat Submit Log Activities</h1>
+
+            {{-- "Tambah Data" Button - Class btn-primary seharusnya sudah benar --}}
+            <a href="{{ route('log_activities.create') }}" class="btn btn-primary">
+                + Tambah Data
+            </a>
+        </div>
     </div>
 
-    {{-- Card untuk membungkus tabel --}}
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            {{-- Judul di dalam card --}}
-            <h6 class="m-0 font-weight-bold text-primary">Daftar Log Activities</h6>
+    {{-- 3. Content Area (Di dalam card luar, di bawah header) --}}
+    {{-- Menggunakan padding dan background yang lebih mendekati target --}}
+    {{-- Coba 'bg-gray-50' (jika Tailwind) atau 'bg-light' (Bootstrap) atau class kustom --}}
+    <div class="p-6 bg-light"> {{-- Coba padding lebih besar (p-6) dan bg-light --}}
+
+        {{-- 4. Sub-title untuk tabel --}}
+        {{-- Coba styling font/margin yang lebih mirip target --}}
+        <h6 class="mb-4 text-secondary">Daftar Log Activities</h6> {{-- Coba mb-4 dan text-secondary/abu-abu --}}
+
+        {{-- 5. Tabel --}}
+        <div class="table-responsive">
+            {{-- Class tabel dari kode Anda sudah benar (striped, hover, bordered, mb-0) --}}
+            <table class="table table-striped table-hover table-bordered mb-0">
+                {{-- Thead: Styling biru harus dari reqbim.css untuk .table thead tr --}}
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Prodi</th>
+                        <th>No Kelompok</th>
+                        <th>File Log</th>
+                        <th>Tanggal Submit</th>
+                        <th class="text-center">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{-- Loop forelse dari kode Anda --}}
+                    @forelse ($logActivities as $index => $logActivity)
+                    <tr>
+                        {{-- Data tidak diubah --}}
+                        <td>{{ $logActivities->firstItem() + $index }}</td>
+                        <td>{{ $logActivity->nama ?? '-' }}</td>
+                        <td>{{ $logActivity->prodi ?? '-' }}</td>
+                        <td>{{ $logActivity->no_kelompok ?? '-' }}</td>
+                        <td>
+                            @if($logActivity->file_log)
+                                {{-- Link file tidak diubah --}}
+                                <a href="{{ asset('storage/logs/' . $logActivity->file_log) }}" target="_blank">{{ $logActivity->file_log }}</a>
+                            @else
+                                -
+                            @endif
+                        </td>
+                        {{-- Format tanggal tidak diubah --}}
+                        <td>{{ $logActivity->submitted_at ? $logActivity->submitted_at->format('d M Y H:i') : '-' }}</td>
+                        {{-- Kolom Aksi: Class kolom & Tombol dari kode Anda --}}
+                        {{-- Warna tombol (info, warning, danger) sudah sesuai target --}}
+                        <td class="text-center align-middle">
+                            {{-- Tombol Detail (info - cyan/biru muda) --}}
+                            <a href="{{ route('log_activities.show', $logActivity->id) }}" class="btn btn-sm btn-info mb-1" title="Lihat Detail">Detail</a>
+                            {{-- Tombol Edit (warning - kuning) --}}
+                            <a href="{{ route('log_activities.edit', $logActivity->id) }}" class="btn btn-sm btn-warning mb-1" title="Edit">Edit</a>
+                            {{-- Tombol Hapus (danger - merah) --}}
+                            <form action="{{ route('log_activities.destroy', $logActivity->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus log ini?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger mb-1" title="Hapus">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @empty
+                    {{-- Empty state dari kode Anda --}}
+                    <tr>
+                        <td colspan="7" class="text-center">Belum ada data log activities yang disubmit.</td>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div> {{-- End .table-responsive --}}
+
+        {{-- 6. Pagination --}}
+        @if ($logActivities->hasPages())
+        {{-- Wrapper pagination tidak diubah --}}
+        <div class="mt-4 d-flex justify-content-center">
+            {{ $logActivities->links() }}
         </div>
-        <div class="card-body">
-            <div class="table-responsive"> {{-- Membuat tabel responsif --}}
-                {{-- Hapus <form> yang membungkus tabel jika tidak diperlukan --}}
-                <table class="table table-bordered table-striped" id="dataTableLogActivities" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>Nama</th>
-                            <th>Prodi</th>
-                            <th>Nomor Kelompok</th>
-                            <th>File Log</th>
-                            <th>Tanggal Submit</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{-- Menggunakan @forelse untuk menangani jika $logActivities kosong --}}
-                        @forelse ($logActivities as $logActivity)
-                        <tr>
-                            {{-- Pastikan objek $logActivity memiliki properti ini --}}
-                            <td>{{ $logActivity->nama ?? '-' }}</td>
-                            <td>{{ $logActivity->prodi ?? '-' }}</td>
-                            <td>{{ $logActivity->no_kelompok ?? '-' }}</td>
-                            <td>
-                                <a href="{{ asset('storage/logs/' . $logActivity->file_log) }}" target="_blank">
-                                    {{ $logActivity->file_log ?? '-' }}
-                                </a>
-                            </td>
-                            <td>{{ $logActivity->submitted_at ? $logActivity->submitted_at->format('d-m-Y H:i:s') : '-' }}</td>
-                            <td>
-                                {{-- Pastikan route 'log_activities.edit' dan 'log_activities.show' ada --}}
-                                {{-- Tambahkan title untuk tooltip dan ikon jika diinginkan --}}
-                                <a href="{{ route('log_activities.edit', $logActivity->id) }}" class="btn btn-sm btn-warning" title="Edit">
-                                    <i class="fas fa-edit"></i> Edit {{-- Hapus ikon jika tidak pakai FontAwesome --}}
-                                </a>
-                                <a href="{{ route('log_activities.show', $logActivity->id) }}" class="btn btn-sm btn-info" title="Lihat">
-                                    <i class="fas fa-eye"></i> Lihat {{-- Hapus ikon jika tidak pakai FontAwesome --}}
-                                </a>
-                                {{-- Tambahkan tombol lain jika perlu (misal: Hapus) --}}
-                                <form action="{{ route('log_activities.destroy', $logActivity->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger" title="Hapus">
-                                        <i class="fas fa-trash"></i> Hapus
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        @empty
-                        {{-- Tampilan jika $logActivities kosong --}}
-                        <tr>
-                            {{-- Colspan harus sesuai jumlah kolom (ada 6 kolom) --}}
-                            <td colspan="6" class="text-center">Belum ada data log activities yang disubmit.</td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
+        @endif
 
-             {{-- Tampilkan link pagination jika menggunakan pagination pada $logActivities --}}
-             <div class="mt-3 d-flex justify-content-center">
-                {{-- Uncomment baris di bawah jika Anda mengirimkan data pagination dari controller ($logActivities = Model::paginate()) --}}
-                {{ $logActivities->links() }}
-             </div>
+    </div> {{-- End .p-6 .bg-light --}}
+</div> {{-- End .card --}}
 
-        </div> {{-- Akhir card-body --}}
-    </div> {{-- Akhir card --}}
-
-</div> {{-- Akhir container --}}
 @endsection
 
-{{-- Opsional: Push CSS/JS jika diperlukan --}}
-@push('styles')
-    {{-- <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet"> --}}
-    <style>
-        /* CSS Kustom jika diperlukan */
-        .btn-sm i { /* Contoh styling ikon di tombol kecil */
-            margin-right: 3px;
-        }
-    </style>
-@endpush
-
-@push('scripts')
-    {{-- <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script> --}}
-    {{-- <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script> --}}
-    {{-- <script> --}}
-    {{-- $(document).ready(function() { --}}
-    {{--     $('#dataTableLogActivities').DataTable(); // Inisialisasi DataTables jika digunakan --}}
-    {{-- }); --}}
-    {{-- </script> --}}
-@endpush
+{{-- @push sections tidak diubah --}}

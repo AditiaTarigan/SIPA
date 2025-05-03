@@ -1,7 +1,149 @@
-h1 {
-    color: black;
-}
+/* style.css - Contoh CSS Manual (Jika TIDAK pakai Tailwind) */
 
-.card-header{
-    color: black;
-}
+/* Container dan Card */
+.container {
+    max-width: 1280px; /* Contoh */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2rem 1rem; /* px-4 py-8 */
+  }
+
+  .card {
+    background-color: #ffffff;
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+    overflow: hidden;
+  }
+
+  .card-header {
+    padding: 1rem 1.5rem; /* px-6 py-4 */
+    border-bottom: 1px solid #e5e7eb; /* border-b border-gray-200 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card-title {
+    font-size: 1.875rem; /* text-3xl */
+    font-weight: 600; /* font-semibold */
+    color: #1f2937; /* text-gray-800 */
+  }
+
+  .card-body {
+    padding: 1.5rem; /* p-6 */
+    background-color: #f9fafb; /* bg-gray-50 */
+  }
+
+  .body-title {
+      font-size: 1.25rem; /* text-xl */
+      font-weight: 500; /* font-medium */
+      color: #374151; /* text-gray-700 */
+      margin-bottom: 1rem; /* mb-4 */
+  }
+
+  /* Tombol Utama */
+  .btn {
+    display: inline-block;
+    font-weight: 700; /* font-bold */
+    padding: 0.5rem 1rem; /* py-2 px-4 */
+    border-radius: 0.25rem; /* rounded */
+    color: #ffffff;
+    text-decoration: none;
+    transition: background-color 0.15s ease-in-out;
+  }
+
+  .btn-primary {
+    background-color: #3b82f6; /* bg-blue-500 */
+  }
+  .btn-primary:hover {
+    background-color: #2563eb; /* hover:bg-blue-600 */
+  }
+
+  /* Tabel */
+  .table-wrapper {
+      overflow-x: auto;
+      position: relative;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+      border-radius: 0.5rem; /* sm:rounded-lg */
+  }
+
+  .table {
+    width: 100%;
+    font-size: 0.875rem; /* text-sm */
+    text-align: left;
+    color: #4b5563; /* text-gray-600 */
+  }
+
+  .table thead {
+    font-size: 0.75rem; /* text-xs */
+    text-transform: uppercase;
+    color: #ffffff; /* text-white */
+    background-color: #2563eb; /* bg-blue-600 */
+  }
+
+  .table th,
+  .table td {
+    padding: 0.75rem 1.5rem; /* py-3 px-6 */
+  }
+
+  .table tbody tr {
+    background-color: #ffffff; /* bg-white */
+    border-bottom: 1px solid #e5e7eb; /* border-b */
+  }
+  .table tbody tr:hover {
+    background-color: #f9fafb; /* hover:bg-gray-50 */
+  }
+
+  .table td a {
+      color: #2563eb; /* text-blue-600 */
+  }
+  .table td a:hover {
+      text-decoration: underline; /* hover:underline */
+  }
+
+  /* Tombol Aksi di Tabel */
+  .btn-action {
+      display: inline-block;
+      font-size: 0.75rem; /* text-xs */
+      font-weight: 700; /* font-bold */
+      padding: 0.25rem 0.75rem; /* py-1 px-3 */
+      border-radius: 0.25rem; /* rounded */
+      color: #ffffff;
+      margin-right: 0.25rem; /* mr-1 */
+      transition: background-color 0.15s ease-in-out;
+      cursor: pointer;
+      border: none; /* Untuk tombol submit form */
+  }
+
+  .btn-view {
+      background-color: #06b6d4; /* bg-cyan-500 */
+  }
+  .btn-view:hover {
+      background-color: #0891b2; /* hover:bg-cyan-600 */
+  }
+
+  .btn-edit {
+      background-color: #f59e0b; /* bg-yellow-500 */
+  }
+  .btn-edit:hover {
+      background-color: #d97706; /* hover:bg-yellow-600 */
+  }
+
+  .btn-delete {
+      background-color: #ef4444; /* bg-red-500 */
+  }
+  .btn-delete:hover {
+      background-color: #dc2626; /* hover:bg-red-600 */
+  }
+
+  /* Untuk form inline tombol delete */
+  .inline-form {
+      display: inline-block;
+  }
+
+  /* Untuk spasi antar baris di tanggal submit */
+  td br {
+      display: block; /* Memastikan <br> berfungsi */
+      content: "";
+      margin-top: 0.25rem; /* Jarak kecil antar baris */
+  }

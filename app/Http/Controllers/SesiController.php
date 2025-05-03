@@ -31,11 +31,11 @@ class SesiController extends Controller
             // Kalau login berhasil, cek role-nya
             $user = Auth::user();
             if ($user->role == 'admin') {
-                return redirect()->route('admin.dashboard');
+                return redirect()->route('Admin.Dashboard');
             } elseif ($user->role == 'mahasiswa') {
                 return redirect()->route('request-judul.index');
             } elseif ($user->role == 'dosen') {
-                return redirect()->route('dosen.dashboard');
+                return redirect()->route('Dosen.Dashboard');
             } else {
                 return redirect()->route('home'); // fallback
             }

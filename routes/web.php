@@ -1,22 +1,19 @@
 <?php
 
-use App\Http\Controllers\SesiController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
+// --- Controller Imports ---
+use App\Http\Controllers\SesiController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\RequestJudulController;
 use App\Http\Controllers\RequestBimbinganController;
 use App\Http\Controllers\HistoryController;
-// Commented out controllers - uncomment when needed
-// use App\Http\Controllers\JudulController;
-// use App\Http\Controllers\BimbinganController;
-use App\Http\Controllers\LogActivityController;
-// use App\Http\Controllers\CatatanController;
-// use App\Http\Controllers\ChatController;
 use App\Http\Controllers\DokumenController;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use App\Http\Controllers\LogActivityController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,64 +21,68 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 |--------------------------------------------------------------------------
 */
 
-// --- Guest Routes (Users Not Logged In) ---
+// --- Guest Routes ---
+// Hanya bisa diakses jika BELUM login
 Route::middleware(['guest'])->group(function() {
     Route::get('/', [SesiController::class, 'index'])->name('login');
-    Route::post('/', [SesiController::class, 'login']); // Handles login form submission
+    Route::post('/', [SesiController::class, 'login']);
 });
 
-// --- Authenticated Routes (Users Must Be Logged In) ---
+// --- Authenticated Routes  ---
+// Semua route di dalam grup ini WAJIB login
 Route::middleware(['auth'])->group(function () {
 
-    // Home route - redirects based on role
+    // 1. Admin Dashboard Route
+    Route::get('/admin/dashboard', function() {
+        // Ganti ini dengan Controller dan View Admin yang sebenarnya
+        return view('Admin.Dashboard');
+    })->name('Admin.Dashboard');
+
+    // 2. Dosen Dashboard Route
+    Route::get('/dosen/dashboard', [DosenController::class,'dashboard'])->name('Dosen.Dashboard');
+
+    // 3. Mahasiswa Dashboard Route
+    Route::get('/mahasiswa/dashboard', function() {
+        return view('Mhs.Dashboard');
+    })->name('Mhs.Dashboard');
+
+
+    // --- Home route - Redirects based on role ---
     Route::get('/home', function () {
         $user = Auth::user();
-        if ($user->role == 'mahasiswa') {
-            // Redirect mahasiswa, e.g., to request judul index or their specific dashboard
-            return redirect()->route('request-judul.index');
+        if ($user->role == 'admin') {
+            return redirect()->route('Admin.Dashboard');
         } elseif ($user->role == 'dosen') {
-             // Redirect dosen to their dashboard
-            return redirect()->route('dosen.dashboard');
+            return redirect()->route('Dosen.Dashboard');
+        } elseif ($user->role == 'mahasiswa') {
+            return redirect()->route('Mhs.Dashboard');
         } else {
-            // Default redirect for other roles (e.g., admin)
-            // Replace 'admin.dashboard' with your actual default/admin dashboard route name
-            return redirect()->route('admin.dashboard'); // Example: You need to define this route
+            Auth::logout();
+            return redirect()->route('login')->withErrors('Pengguna tidak valid.');
         }
-    })->name('home'); // Give the home route a name
+    })->name('home');
+
 
     Route::get('/dosen', [DosenController::class,'index'])->name('dosen.index');
 
+
     Route::resource('mahasiswa', MahasiswaController::class);
-
     Route::resource('history', HistoryController::class);
-
     Route::resource('dokumen', DokumenController::class);
 
+    // Request Judul
     Route::resource('request-judul', RequestJudulController::class);
 
+    // Request Bimbingan
     Route::resource('request-bimbingan', RequestBimbinganController::class);
 
     Route::resource('history', HistoryController::class);
 
+    // Log Activities
     Route::resource('log_activities', LogActivityController::class);
 
+    // --- Logout Route ---
     Route::post('/logout', [SesiController::class,'logout'])->name('logout');
 
-    // --- Example Admin Dashboard Route (define controller/view) ---
-    Route::get('/admin/dashboard', function() {
-        return view('dashboard.admin'); // Replace with actual view/controller
-    })->name('dashboard.admin')->middleware('role:admin'); // Example: Restrict to admin role
-
-}); // End of Auth Middleware Group
-
-
-// --- Optional Test Routes (Remove or comment out in production) ---
-Route::get('/test-db', function () {
-    try {
-        DB::connection()->getPdo();
-        return 'Connected to: ' . DB::connection()->getDatabaseName();
-    } catch (\Exception $e) {
-        return 'Could not connect. ' . $e->getMessage();
-    }
 });
 
