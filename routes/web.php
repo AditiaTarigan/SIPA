@@ -3,10 +3,10 @@
 // --- Use statements ---
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-// Hapus DB jika tidak dipakai langsung di sini: use Illuminate\Support\Facades\DB;
-use Carbon\Carbon; // Pastikan namespace Carbon benar
+// Hapus DB jika tidak dipakai langsung di sini: // use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use Carbon\CarbonPeriod;
-use Illuminate\Http\Request; // Perlu untuk inject $request
+use Illuminate\Http\Request;
 
 // --- Controller Imports ---
 use App\Http\Controllers\SesiController;
@@ -17,35 +17,37 @@ use App\Http\Controllers\RequestBimbinganController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\DokumenController;
 use App\Http\Controllers\LogActivityController;
-// Hapus CalendarController jika tidak dipakai lagi: use App\Http\Controllers\CalendarController;
+// Hapus CalendarController jika tidak dipakai lagi: // use App\Http\Controllers\CalendarController;
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
+|
+| Di sini Anda dapat mendaftarkan route web untuk aplikasi Anda. Route
+| ini dimuat oleh RouteServiceProvider dalam sebuah grup yang
+| mengandung middleware "web" group. Sekarang buat sesuatu yang hebat!
+|
 */
 
-// --- Guest Routes ---
+// --- Guest Routes (Akses Tanpa Autentikasi) ---
 Route::middleware(['guest'])->group(function() {
-    Route::get('/', [SesiController::class, 'index'])->name('login');
-    Route::post('/', [SesiController::class, 'login']);
+    Route::get('/', [SesiController::class, 'index'])->name('login'); // Halaman login
+    Route::post('/', [SesiController::class, 'login']); // Proses login
 });
 
-// --- Authenticated Routes  ---
+// --- Authenticated Routes (Akses Setelah Login) ---
 Route::middleware(['auth'])->group(function () {
 
     // 1. Admin Dashboard Route
     Route::get('/admin/dashboard', function() {
-        // Jika perlu kalender di admin, logikanya taruh di sini
+        // Jika perlu data spesifik admin, ambil di sini sebelum return view
         return view('Admin.Dashboard');
     })->name('Admin.Dashboard');
 
-    // 2. Dosen Dashboard Route
-    // Jika perlu kalender di dosen, logikanya taruh di DosenController::dashboard
-    Route::get('/dosen/dashboard', function(Request $request) {
-        // Jika perlu kalender di dosen, logikanya taruh di sini
-
-        // --- LOGIKA KALENDER ---
+    // 2. Dosen Dashboard Route (dengan Logika Kalender)
+    Route::get('/dosen/dashboard', function(Request $request) { // Inject Request
+        // --- LOGIKA KALENDER (Dipertahankan sesuai kode Anda) ---
         $month = $request->input('cal_month', Carbon::now()->month);
         $year = $request->input('cal_year', Carbon::now()->year);
         try {
@@ -68,26 +70,20 @@ Route::middleware(['auth'])->group(function () {
         }
         // --- AKHIR LOGIKA KALENDER ---
 
-        // Gabungkan semua data yang diperlukan oleh view Mhs.Dashboard
         $viewData = [
-            // Mungkin ada data lain yang perlu dikirim ke view mahasiswa?
-            // 'mahasiswa' => Auth::user(), // Contoh
-
-            // Data Kalender (WAJIB ADA)
             'cal_currentMonthDate' => $currentMonthDate,
             'cal_calendarPeriod'   => $calendarPeriod,
             'cal_daysOfWeek'       => $daysOfWeek,
             'cal_prevMonthParams'  => ['cal_month' => $prevMonthDate->month, 'cal_year' => $prevMonthDate->year],
             'cal_nextMonthParams'  => ['cal_month' => $nextMonthDate->month, 'cal_year' => $nextMonthDate->year],
+            // Tambahkan data spesifik Dosen jika ada
         ];
-        // Kirim data ke view Dosen Dashboard
         return view('Dosen.Dashboard', $viewData);
     })->name('Dosen.Dashboard');
 
-    // 3. Mahasiswa Dashboard Route <<-- TEMPATKAN LOGIKA KALENDER DI SINI
-    Route::get('/mahasiswa/dashboard', function(Request $request) { // Inject Request di sini
-
-        // --- LOGIKA KALENDER ---
+    // 3. Mahasiswa Dashboard Route (dengan Logika Kalender)
+    Route::get('/mahasiswa/dashboard', function(Request $request) { // Inject Request
+         // --- LOGIKA KALENDER (Dipertahankan sesuai kode Anda) ---
         $month = $request->input('cal_month', Carbon::now()->month);
         $year = $request->input('cal_year', Carbon::now()->year);
         try {
@@ -110,57 +106,64 @@ Route::middleware(['auth'])->group(function () {
         }
         // --- AKHIR LOGIKA KALENDER ---
 
-        // Gabungkan semua data yang diperlukan oleh view Mhs.Dashboard
         $viewData = [
-            // Mungkin ada data lain yang perlu dikirim ke view mahasiswa?
-            // 'mahasiswa' => Auth::user(), // Contoh
-
-            // Data Kalender (WAJIB ADA)
             'cal_currentMonthDate' => $currentMonthDate,
             'cal_calendarPeriod'   => $calendarPeriod,
             'cal_daysOfWeek'       => $daysOfWeek,
             'cal_prevMonthParams'  => ['cal_month' => $prevMonthDate->month, 'cal_year' => $prevMonthDate->year],
             'cal_nextMonthParams'  => ['cal_month' => $nextMonthDate->month, 'cal_year' => $nextMonthDate->year],
+            // Tambahkan data spesifik Mahasiswa jika ada
         ];
+        return view('Mhs.Dashboard', $viewData);
+    })->name('Mhs.Dashboard');
 
-        // Kirim data ke view Mahasiswa Dashboard
-        return view('Mhs.Dashboard', $viewData); // <<-- Kirim $viewData ke view yang benar
-
-    })->name('Mhs.Dashboard'); // <<-- Nama route yang benar
-
-
-    // --- Home route - HANYA REDIRECT ---
-    Route::get('/home', function () { // Tidak perlu $request di sini
+    // --- Home route - Redirect Berdasarkan Role ---
+    Route::get('/home', function () {
         $user = Auth::user();
         if ($user->role == 'admin') {
             return redirect()->route('Admin.Dashboard');
         } elseif ($user->role == 'dosen') {
             return redirect()->route('Dosen.Dashboard');
         } elseif ($user->role == 'mahasiswa') {
-            // Redirect ke route /mahasiswa/dashboard yang sudah ada logika kalendernya
-            return redirect()->route('Mhs.Dashboard');
+            return redirect()->route('Mhs.Dashboard'); // Redirect ke dashboard mahasiswa
         } else {
             Auth::logout();
             return redirect()->route('login')->withErrors('Pengguna tidak valid.');
         }
-        // HAPUS SEMUA LOGIKA KALENDER DAN RETURN VIEW DARI SINI
     })->name('home');
 
 
-    // --- Route Lainnya ---
+    // --- Resource & Specific Routes ---
+
+    // Route untuk pengelolaan data Dosen (hanya index)
     Route::get('/dosen', [DosenController::class,'index'])->name('dosen.index');
+
+    // Route Resource standar untuk CRUD Mahasiswa
     Route::resource('mahasiswa', MahasiswaController::class);
-    Route::resource('history', HistoryController::class); // Anda punya dua resource history, mungkin salah satu bisa dihapus?
-    Route::resource('dokumen', DokumenController::class);
+
+    // Route Resource standar untuk CRUD History
+    // Anda punya dua resource history di kode sebelumnya. Saya biarkan salah satunya.
+    Route::resource('history', HistoryController::class);
+
+    // Route Resource standar untuk CRUD Dokumen
+    // Ini mencakup routes: dokumen.index, dokumen.create, dokumen.store,
+    // dokumen.show, dokumen.edit, dokumen.update, dokumen.destroy
+    // Parameter yang digunakan oleh resource ini adalah {dokumen} (dengan 'e')
+    Route::resource('dokumen', DokumenController::class); // <-- DEFINISI YANG BENAR
+
+    // Route Resource standar untuk CRUD Request Judul
     Route::resource('request-judul', RequestJudulController::class);
+
+    // Route Resource standar untuk CRUD Request Bimbingan
     Route::resource('request-bimbingan', RequestBimbinganController::class);
-    // Route::resource('history', HistoryController::class); // Duplikat
+
+    // Route Resource standar untuk CRUD Log Activity
     Route::resource('log_activities', LogActivityController::class);
 
     // --- Logout Route ---
     Route::post('/logout', [SesiController::class,'logout'])->name('logout');
 
-    // --- Calendar Route (Hapus jika tidak dipakai lagi) ---
+    // --- Calendar Route (Dikommentari sesuai kode Anda, hapus jika tidak dipakai) ---
     // Route::get('/kalender', [CalendarController::class, 'show'])->name('calendar.show');
 
 });
