@@ -79,20 +79,17 @@
                                 {{-- Kolom Aksi: Menambah style nowrap, mempertahankan class & tombol asli --}}
                                 <td class="text-center align-middle" style="white-space: nowrap;">
                                     {{-- Tombol Edit tidak diubah (url, class, ikon) --}}
-                                    <a href="{{ url('history/'.$item->id.'/edit') }}" class="btn btn-warning btn-sm mb-1" title="Edit">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
+                                    <a href="{{ url('history/'.$item->id.'/edit') }}" class="btn btn-sm btn-warning mb-1">Edit</a>
+
+
                                     {{-- Tombol Hapus tidak diubah (form, url, class, ikon) --}}
-                                    <form onsubmit="return confirm('Yakin akan menghapus data ini?')"
-                                          class="d-inline"
-                                          action="{{ url('history/'.$item->id) }}"
-                                          method="post">
+
+                                    <form action="{{ url('history/'.$item->id) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm mb-1" title="Hapus">
-                                             <i class="fas fa-trash"></i>
-                                        </button>
+                                        <button type="submit" class="btn btn-sm btn-danger mb-1" onclick="return confirm('Yakin ingin menghapus request ini?')">Hapus</button>
                                     </form>
+
                                 </td>
                             </tr>
                         @empty
