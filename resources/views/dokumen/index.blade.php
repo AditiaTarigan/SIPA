@@ -11,10 +11,6 @@
 @section('content')
 
 
-{{-- Container Bootstrap untuk padding dan lebar responsif --}}
-<div class="container py-4">
-
-
     {{-- Card utama untuk membungkus konten --}}
     <div class="card">
 
@@ -38,19 +34,6 @@
             <p class="card-header">Daftar Dokumen Tersubmit</p>
 
                 {{-- MODIFIKASI: Menghapus cellspacing dan menambah inline style --}}
-
-        {{-- Body card (area konten tabel) --}}
-        <div class="p-4 bg-light">
-
-            {{-- Sub-judul untuk tabel --}}
-            <p class="mb-3 text-muted">Daftar Dokumen Tersubmit</p>
-
-            {{-- Tabel responsif --}}
-            <div class="table-responsive">
-                {{-- Tabel utama --}}
-                {{-- MODIFIKASI ASLI: Anda menambahkan inline style border-spacing. --}}
-                {{-- Perhatikan bahwa ini memberikan jarak antar sel. --}}
-                {{-- Jika ingin tampilan standar Bootstrap, hapus style="...". --}}
 
                 <table class="table table-striped table-hover mb-0" id="dataTableDokumen" width="100%"
                        style="border-collapse: separate; border-spacing: 1px;">
