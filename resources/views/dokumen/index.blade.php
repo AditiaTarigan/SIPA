@@ -6,12 +6,9 @@
 @section('title', 'Riwayat Submit Dokumen') {{-- Judul tidak diubah --}}
 
 @section('content')
-{{-- Container asli dipertahankan --}}
-<div class="container py-4">
 
     {{-- 1. Outer Card Wrapper --}}
     <div class="card">
-
         {{-- 2. Header Section (Inside card) --}}
         <div class="px-4 py-3 border-bottom bg-white">
             <div class="d-flex justify-content-between align-items-center">
@@ -22,14 +19,9 @@
             </div>
         </div>
 
-        {{-- 3. Content Area (Inside card, below header) --}}
-        <div class="p-4 bg-light">
-
             {{-- 4. Sub-title untuk tabel --}}
-            <p class="mb-3 text-muted">Daftar Dokumen Tersubmit</p>
+            <p class="card-header">Daftar Dokumen Tersubmit</p>
 
-            {{-- 5. Tabel --}}
-            <div class="table-responsive">
                 {{-- MODIFIKASI: Menghapus cellspacing dan menambah inline style --}}
                 <table class="table table-striped table-hover mb-0" id="dataTableDokumen" width="100%"
                        style="border-collapse: separate; border-spacing: 1px;">
@@ -60,8 +52,6 @@
                                 @else
                                 {{ basename($dokumen->dokumen) ?? '-' }}
                                 @endif
-                            </td>
-                            {{-- Kolom Aksi: Style nowrap dipertahankan --}}
                             <td class="text-center align-middle" style="white-space: nowrap;">
                                 <a href="{{ route('dokumen.edit', $dokumen->id) }}" class="btn btn-sm btn-warning mb-1" title="Edit">
                                     <i class="fas fa-edit"></i> Edit

@@ -16,7 +16,7 @@
             <h1 colour="dark">Request Bimbingan</h1>
             {{-- Make sure the user role check is appropriate for who can create --}}
             @if(Auth::user()->role == 'mahasiswa')
-                <a href="{{ route('request-bimbingan.create') }}" class="btn btn-primary mb-3">Buat Request Baru</a>
+                <a href="{{ route('request-bimbingan.create') }}" class="btn btn-primary mb-3">Ajukan Bimbingan Baru</a>
             @endif
         </div>
 

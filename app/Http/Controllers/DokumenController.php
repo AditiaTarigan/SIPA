@@ -47,6 +47,14 @@ class DokumenController extends Controller
 
     public function edit(Dokumen $dokumen)
     {
+        // Pastikan hanya admin atau dosen yang bisa mengedit
+        // $this->authorize('update', $dokumen); // Jika ada policy
+        // Atau bisa menggunakan gate
+        // Gate::authorize('update', $dokumen);
+        // Jika tidak ada policy, bisa langsung cek role
+        // if (auth()->user()->role !== 'admin' && auth()->user()->role !== 'dosen') {
+        //     abort(403, 'Anda tidak memiliki izin untuk mengedit dokumen ini.');
+        // }
         return view('dokumen.edit', compact('dokumen'));
     }
 
