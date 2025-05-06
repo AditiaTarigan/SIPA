@@ -57,10 +57,10 @@
 
              {{-- Tombol Edit untuk Mahasiswa pembuat --}}
              @if(Auth::user()->role == 'mahasiswa' && Auth::id() == $requestJudul->mahasiswa_id)
-                 <a href="{{ route('request-judul.edit', $requestJudul->id) }}" class="btn btn-warning">Edit Request</a>
+                 <a href="{{ route('request-judul.edit', $requestJudul->id) }}" class="btn btn-warning">Edit</a>
              @endif
 
-            <a href="{{ route('request-judul.index') }}" class="btn btn-secondary">Kembali ke Daftar</a>
+            <a href="{{ route('request-judul.index') }}" class="btn btn-secondary">Kembali</a>
         </div>
     </div>
 </div>

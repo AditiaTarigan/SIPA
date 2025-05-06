@@ -1,5 +1,8 @@
 <link href="{{ asset('css/reqbim.css') }}" rel="stylesheet"> {{-- Sesuaikan dengan CSS Log Activities --}}
+
 @extends('layouts.utama')
+
+@section('title', 'Edit Log Aktivitas')
 
 @section('content')
 <div class="container">
@@ -9,6 +12,8 @@
         @csrf
         @method('PUT')
 
+        <div class="card">
+        <div class="card-body">
         <div class="mb-3">
             <label for="nama" class="form-label">Nama</label>
             <input type="text" class="form-control" id="nama" name="nama" value="{{ $logActivity->nama }}" required>
@@ -28,8 +33,12 @@
             <label for="file_log" class="form-label">Upload File Log Baru (Opsional)</label>
             <input type="file" class="form-control" id="file_log" name="file_log">
         </div>
-
-        <button type="submit" class="btn btn-success">Simpan Perubahan</button>
+        <div class="text-end">
+        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+        <a href="{{ route('log_activities.index') }}" class="btn btn-secondary">Batal</a>
+    </div>
     </form>
+</div>
+</div>
 </div>
 @endsection

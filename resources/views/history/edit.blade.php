@@ -1,14 +1,19 @@
+<link href="{{ asset('css/reqbim.css') }}" rel="stylesheet">
+
 @extends('layouts.utama') {{-- Layout utama --}}
 
 @section('title', 'Edit Data Bimbingan')
 
 @section('content')
+<div class="container">
+    <h2 style="color: black">Edit Data Bimbingan</h2>
+
+    <div class="card">
+    <div class="card-body">
 <!-- START FORM -->
 <form action="{{ url('history/' . $data->id) }}" method="post">
     @csrf
     @method('PUT')
-    <div class="my-3 p-3 bg-body rounded shadow-sm">
-        <a href="{{ url('history') }}" class="btn btn-secondary">&laquo; Kembali</a>
 
         <div class="mb-3 row">
             <label for="tanggal" class="col-sm-2 col-form-label">Tanggal Bimbingan</label>
@@ -50,9 +55,10 @@
             </div>
         </div>
 
-        <div class="mb-3 row">
-            <div class="offset-sm-2 col-sm-10">
-                <button type="submit" class="btn btn-primary" name="submit">UPDATE</button>
+            <div class="text-end">
+                <button type="submit" class="btn btn-primary" name="submit">Simpan Perubahan</button>
+
+        <a href="{{ url('history') }}" class="btn btn-secondary">Batal</a>
             </div>
         </div>
     </div>

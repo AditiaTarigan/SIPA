@@ -31,7 +31,7 @@
 
 
             {{-- 4. Sub-title untuk tabel --}}
-            <p class="card-header">Daftar Dokumen Tersubmit</p>
+            <p class="card-header">Daftar Dokumen Sebelumnya</p>
 
                 {{-- MODIFIKASI: Menghapus cellspacing dan menambah inline style --}}
 
@@ -69,15 +69,15 @@
                             </td>
                             {{-- Kolom Aksi --}}
                             <td class="text-center align-middle" style="white-space: nowrap;">
-                                {{-- Tombol Edit: Menggunakan route dokumen.edit --}}
-                                {{-- Ini memanggil metode edit di DokumenController --}}
-                                <a href="{{ route('dokumen.edit', $dokumen->id) }}" class="btn btn-sm btn-warning mb-1" title="Edit">
-                                    <i class="fas fa-edit"></i> Edit
-                                </a>
                                 {{-- Tombol Lihat: Menggunakan route dokumen.show --}}
                                 {{-- Ini memanggil metode show di DokumenController --}}
                                 <a href="{{ route('dokumen.show', $dokumen->id) }}" class="btn btn-sm btn-info mb-1" title="Lihat">
-                                    <i class="fas fa-eye"></i> Lihat
+                                    Detail
+                                </a>
+                                {{-- Tombol Edit: Menggunakan route dokumen.edit --}}
+                                {{-- Ini memanggil metode edit di DokumenController --}}
+                                <a href="{{ route('dokumen.edit', $dokumen->id) }}" class="btn btn-sm btn-warning mb-1" title="Edit">
+                                    Edit
                                 </a>
                                 {{-- Form Hapus: Menggunakan route dokumen.destroy --}}
                                 {{-- Ini memanggil metode destroy di DokumenController --}}
@@ -87,7 +87,7 @@
                                     @csrf {{-- Token CSRF untuk keamanan form --}}
                                     @method('DELETE') {{-- Mengoverride method POST menjadi DELETE --}}
                                     <button type="submit" class="btn btn-sm btn-danger mb-1" title="Hapus">
-                                        <i class="fas fa-trash"></i> Hapus
+                                     Hapus
                                     </button>
                                 </form>
                             </td>

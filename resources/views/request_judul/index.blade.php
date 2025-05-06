@@ -8,14 +8,13 @@
 <div class="card">
 <div class="d-flex justify-content-between align-items-center mb-3 request-judul-header">
     {{-- Sesuaikan dengan layout yang Anda gunakan --}}
-    <h1 colour="dark">Request Judul</h1>
+    <h1>Request Judul</h1>
     {{-- Make sure the user role check is appropriate for who can create --}}
     @if(Auth::user()->role == 'mahasiswa')
          <a href="{{ route('request-judul.create') }}" class="btn btn-primary mb-3">Ajukan Judul Baru</a>
     @endif
     </div>
 
-    <div class="card">
         <div class="card-header">Daftar Request Judul Sebelumnya</div>
         <div class="card-body p-0">
             <div class="table-responsive">

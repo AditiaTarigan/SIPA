@@ -5,7 +5,7 @@
 @section('title', 'Request Bimbingan Details')
 
 @section('content')
-    <h1>Request Bimbingan Details</h1>
+    <h1>Detail Request Bimbingan</h1>
 
     <div class="card">
         <div class="card-header">
@@ -43,22 +43,19 @@
                  <dt class="col-sm-3">Tujuan Bimbingan</dt>
                 <dd class="col-sm-9">: {{ nl2br(e($requestBimbingan->tujuan_bimbingan)) }}</dd>
 
-                 <dt class="col-sm-3">Requested At</dt>
+                 <dt class="col-sm-3">Tanggal Diajukan</dt>
                  <dd class="col-sm-9">: {{ $requestBimbingan->created_at->format('d M Y H:i:s') }}</dd>
 
-                 <dt class="col-sm-3">Status (Placeholder)</dt>
-                 <dd class="col-sm-9">: <span class="badge bg-warning">Pending</span></dd> {{-- Add actual status logic later --}}
+                 <dt class="col-sm-3">Status</dt>
+                 <dd class="col-sm-9">: <span class="badge bg-warning text-dark">Pending</span></dd> {{-- Add actual status logic later --}}
             </dl>
         </div>
         <div class="card-footer">
-             <a href="{{ route('request-bimbingan.index') }}" class="btn btn-secondary">Back to List</a>
+             <a href="{{ route('request-bimbingan.index') }}" class="btn btn-secondary">Kembali</a>
              {{-- Add authorization check --}}
              @if(Auth::id() == $requestBimbingan->mahasiswa_id)
                  <a href="{{ route('request-bimbingan.edit', $requestBimbingan->id) }}" class="btn btn-warning">Edit</a>
                  <form action="{{ route('request-bimbingan.destroy', $requestBimbingan->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this request?');">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
              @endif
         </div>

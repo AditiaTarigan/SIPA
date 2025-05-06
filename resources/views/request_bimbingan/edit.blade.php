@@ -5,8 +5,11 @@
 @section('title', 'Edit Request Bimbingan')
 
 @section('content')
+<div class="container">
     <h1>Edit Request Bimbingan</h1>
 
+    <div class="card">
+        <div class="card-body">
     {{-- Display Validation Errors --}}
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -16,6 +19,8 @@
                 @endforeach
             </ul>
         </div>
+    </div>
+</div>
     @endif
 
     <form action="{{ route('request-bimbingan.update', $requestBimbingan->id) }}" method="POST">
@@ -87,7 +92,10 @@
             @enderror
         </div>
 
-        <button type="submit" class="btn btn-primary">Update Request</button>
-        <a href="{{ route('request-bimbingan.index') }}" class="btn btn-secondary">Cancel</a>
+        <div class="text-end">
+        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+        <a href="{{ route('request-bimbingan.index') }}" class="btn btn-secondary">Batal</a>
+    </div>
     </form>
+
 @endsection

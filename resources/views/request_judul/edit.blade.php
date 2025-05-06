@@ -1,4 +1,4 @@
-
+<link href="{{ asset('css/reqbim.css') }}" rel="stylesheet">
 
 @extends('layouts.utama')
 
@@ -21,6 +21,8 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
+
+
 
                 <div class="mb-3">
                     <label style="color: black" for="dosen_id" class="form-label">Pilih Calon Dosen Pembimbing</label>
@@ -45,8 +47,10 @@
                     @enderror
                 </div>
 
-                <a href="{{ route('request-judul.index') }}" class="btn btn-secondary">Batal</a>
+                <div class="text-end">
                 <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                <a href="{{ route('request-judul.index') }}" class="btn btn-secondary">Batal</a>
+            </div>
             </form>
         </div>
     </div>

@@ -35,7 +35,7 @@
 
         {{-- 4. Sub-title untuk tabel --}}
         {{-- Coba styling font/margin yang lebih mirip target --}}
-        <h6 class="card-header">Daftar Log Activities</h6> {{-- Coba mb-4 dan text-secondary/abu-abu --}}
+        <h6 class="card-header">Daftar Log Activities Sebelumnya</h6> {{-- Coba mb-4 dan text-secondary/abu-abu --}}
 
         {{-- 5. Tabel --}}
         <div class="table-responsive">

@@ -20,7 +20,6 @@
             @endif
         </div>
 
-        <div class="card">
             <div class="card-header">Daftar Request Bimbingan Sebelumnya</div>
             <div class="card-body p-0">
                 <div class="table-responsive">

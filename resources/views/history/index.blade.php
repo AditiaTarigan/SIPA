@@ -7,16 +7,14 @@
 @section('title', 'Data Mahasiswa / Riwayat Bimbingan')
 
 @section('content')
-{{-- Container tidak diubah --}}
-<div class="container py-4">
 
     {{-- 1. Outer Card Wrapper --}}
     {{-- Menggunakan class 'card'. Shadow/margin tergantung CSS/layout --}}
     <div class="card">
-
+        <div class="card-body">
         {{-- 2. Header Section (Inside card) --}}
         {{-- Padding & border untuk memisahkan. Menggunakan flexbox. --}}
-        <div class="px-4 py-3 border-bottom bg-white">
+
             <div class="d-flex justify-content-between align-items-center">
                 {{-- Judul Halaman Utama - H1/H3 dari kode asli --}}
                 <h1 class="h3 mb-0 text-gray-800">Riwayat Bimbingan</h1>
@@ -43,10 +41,9 @@
             </div>
 
             {{-- 5. Sub-title untuk tabel --}}
-            <p class="mb-3 text-muted">Daftar Riwayat Bimbingan</p>
+            <div class="card">
+            <p class="card-header">Daftar Riwayat Bimbingan</p>
 
-            {{-- 6. Tabel --}}
-            <div class="table-responsive">
                 {{-- Menghapus 'table-bordered', mempertahankan sisanya --}}
                 <table class="table table-striped table-hover mb-0"
                        id="dataTableHistory" width="100%" cellspacing="0">
@@ -114,6 +111,8 @@
     </div> {{-- End .card --}}
 
 </div> {{-- Akhir .container --}}
+</div>
+</div>
 @endsection
 
 {{-- @push sections tidak diubah --}}
