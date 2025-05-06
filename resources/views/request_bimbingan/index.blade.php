@@ -26,7 +26,7 @@
             <table class="table table-striped table-hover table-bordered mb-0">
                 <thead>
                             <tr>
-                                <th class="text-center">No</th>
+                                <th class="text-center">No.</th>
                                 @if(Auth::user()->role != 'mahasiswa') {{-- Show student details if not a student view --}}
                                     <th class="text-center">NIM</th>
                                     <th class="text-center">Nama Mahasiswa</th>

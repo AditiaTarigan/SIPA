@@ -50,14 +50,14 @@
                     <thead>
                         <tr>
                             {{-- Header asli tidak diubah --}}
-                            <th>No</th>
-                            <th>Tanggal Bimbingan</th>
-                            <th>Topik Bimbingan</th>
-                            <th>Hasil Bimbingan</th>
-                            <th>Rencana Berikutnya</th>
-                            <th>Jumlah Mahasiswa</th>
-                            <th>Tanda Tangan Dosen</th>
-                            <th>Aksi</th>
+                            <th class="text-center">No.</th>
+                            <th class="text-center">Tanggal Bimbingan</th>
+                            <th class="text-center">Topik Bimbingan</th>
+                            <th class="text-center">Hasil Bimbingan</th>
+                            <th class="text-center">Rencana Berikutnya</th>
+                            <th class="text-center">Jumlah Mahasiswa</th>
+                            <th class="text-center">Tanda Tangan Dosen</th>
+                            <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>

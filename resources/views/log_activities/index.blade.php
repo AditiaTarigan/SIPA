@@ -44,12 +44,12 @@
                 {{-- Thead: Styling biru harus dari reqbim.css untuk .table thead tr --}}
                 <thead>
                     <tr>
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>Prodi</th>
-                        <th>No Kelompok</th>
-                        <th>File Log</th>
-                        <th>Tanggal Submit</th>
+                        <th class="text-center">No.</th>
+                        <th class="text-center">Nama</th>
+                        <th class="text-center">Prodi</th>
+                        <th class="text-center">No.Kelompok</th>
+                        <th class="text-center">File Log</th>
+                        <th class="text-center">Tanggal Submit</th>
                         <th class="text-center">Aksi</th>
                     </tr>
                 </thead>
