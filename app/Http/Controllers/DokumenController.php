@@ -90,22 +90,12 @@ class DokumenController extends Controller
      * @param  \App\Models\Dokumen  $dokumen
      * @return \Illuminate\View\View
      */
-    public function edit(Dokumen $dokumen)
+    public function edit($id)
     {
-        // Pastikan hanya admin atau dosen yang bisa mengedit
-        // $this->authorize('update', $dokumen); // Jika ada policy
-        // Atau bisa menggunakan gate
-        // Gate::authorize('update', $dokumen);
-        // Jika tidak ada policy, bisa langsung cek role
-        // if (auth()->user()->role !== 'admin' && auth()->user()->role !== 'dosen') {
-        //     abort(403, 'Anda tidak memiliki izin untuk mengedit dokumen ini.');
-        // }
-
-        // Data dokumen sudah tersedia di variabel $dokumen berkat Route Model Binding
-        // Mengirim data dokumen ke view edit
-
+        $dokumen = Dokumen::findOrFail($id);
         return view('dokumen.edit', compact('dokumen'));
     }
+
 
     /**
      * Memperbarui dokumen yang sudah ada di database.
@@ -154,19 +144,12 @@ class DokumenController extends Controller
      * @param  \App\Models\Dokumen  $dokumen
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Dokumen $dokumen)
-    {
-        // Data dokumen sudah tersedia di variabel $dokumen berkat Route Model Binding
+    public function destroy($id)
+{
+    $dokumen = Dokumen::findOrFail($id);
+    $dokumen->delete(); // <-- Harus ada ini
 
-        // Hapus file terkait dari storage jika ada dan valid
-        if ($dokumen->dokumen && Storage::disk('public')->exists($dokumen->dokumen)) {
-            Storage::disk('public')->delete($dokumen->dokumen);
-        }
+    return redirect()->route('dokumen.index')->with('success', 'Dokumen berhasil dihapus.');
+}
 
-        // Hapus data dokumen dari database
-        $dokumen->delete();
-
-        // Redirect kembali ke halaman index dengan pesan sukses
-        return redirect()->route('dokumen.index')->with('success', 'Dokumen berhasil dihapus.');
-    }
 }
