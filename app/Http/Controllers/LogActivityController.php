@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\LogActivity; // Pastikan model LogActivity sudah dibuat
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth; // Untuk mendapatkan ID user yang login
+use Illuminate\Support\Facades\Storage; // <<< TAMBAHKAN BARIS INI
 
 class LogActivityController extends Controller
 {
@@ -43,8 +44,8 @@ class LogActivityController extends Controller
         // Upload file log
         $fileLog = $request->file('file_log');
         $fileName = time() . '_' . $fileLog->getClientOriginalName();
-        $fileLog->storeAs('logs', $fileName, 'public'); // Simpan di storage/app/public/logs
-
+        // Menggunakan Storage Facade dengan 'public' disk
+Storage::disk('public')->putFileAs('logs', $fileLog, $fileName);
         // Membuat log aktivitas baru
         LogActivity::create([
             'mahasiswa_id' => Auth::id(), // Mendapatkan ID user yang login (pastikan user sudah login)
@@ -96,13 +97,16 @@ class LogActivityController extends Controller
 
         // Jika ada file baru diupload
         if ($request->hasFile('file_log')) {
-            // Hapus file lama
-            Storage::delete('public/logs/' . $logActivity->file_log);
+            // Hapus file lama menggunakan Storage Facade dengan 'public' disk
+            if ($logActivity->file_log && Storage::disk('public')->exists('logs/' . $logActivity->file_log)) { // Periksa apakah file lama ada
+                 Storage::disk('public')->delete('logs/' . $logActivity->file_log);
+            }
 
-            // Upload file baru
+
+            // Upload file baru menggunakan Storage Facade dengan 'public' disk
             $fileLog = $request->file('file_log');
             $fileName = time() . '_' . $fileLog->getClientOriginalName();
-            $fileLog->storeAs('logs', $fileName, 'public');
+            Storage::disk('public')->storeAs('logs', $fileName);
             $logActivity->file_log = $fileName;
         }
 
@@ -117,8 +121,10 @@ class LogActivityController extends Controller
      */
     public function destroy(LogActivity $logActivity)
     {
-        // Hapus file log
-        Storage::delete('public/logs/' . $logActivity->file_log);
+        // Hapus file log menggunakan Storage Facade dengan 'public' disk
+         if ($logActivity->file_log && Storage::disk('public')->exists('logs/' . $logActivity->file_log)) { // Periksa apakah file lama ada
+             Storage::disk('public')->delete('logs/' . $logActivity->file_log);
+         }
 
         // Hapus log aktivitas
         $logActivity->delete();

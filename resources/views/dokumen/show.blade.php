@@ -1,29 +1,34 @@
+{{-- resources/views/dokumen/show.blade.php --}}
+
 {{-- Menggunakan layout utama aplikasi. Sesuaikan dengan nama layout utama Anda jika berbeda. --}}
 @extends('layouts.utama')
 
-{{-- Menetapkan judul halaman. Menggunakan nama file dokumen jika tersedia. --}}
-@section('title', 'Detail Dokumen' . (isset($dokumen->dokumen) ? ': ' . basename($dokumen->dokumen) : ''))
+{{-- Menetapkan judul halaman. --}}
+@section('title', 'Detail Dokumen') {{-- Menggunakan judul yang lebih sederhana seperti referensi --}}
 
 {{-- Konten utama halaman --}}
 @section('content')
-<div class="container py-4">
+<div class="container py-4"> {{-- Menambahkan padding Y untuk kontainer jika belum ada di layout --}}
 
     {{-- Judul Halaman --}}
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Detail Dokumen</h1>
+        <h1 class="h3 mb-0 text-gray-800">Detail Dokumen</h1> {{-- Menggunakan H1/H3 seperti referensi --}}
+        {{-- Tombol Kembali (opsional di bagian atas, bisa juga hanya di footer) --}}
+        {{-- <a href="{{ route('dokumen.index') }}" class="btn btn-secondary">Kembali</a> --}}
     </div>
 
     {{-- Card untuk membungkus detail dokumen --}}
-    <div class="card shadow mb-4">
+    <div class="card shadow mb-4"> {{-- Menambahkan shadow dan margin bawah seperti referensi --}}
         {{-- Header card --}}
-        <div class="card-header py-3">
+        <div class="card-header py-3"> {{-- Menambahkan padding di header --}}
             {{-- Judul di dalam card. Tampilkan ID dokumen jika ada. --}}
             <h6 class="m-0 font-weight-bold text-primary">Detail Dokumen #{{ $dokumen->id ?? '' }}</h6>
         </div>
         {{-- Body card (area detail dokumen) --}}
         <div class="card-body">
             {{-- Menggunakan Description List (dl) untuk menampilkan pasangan label-nilai --}}
-            <dl class="row">
+            <dl class="row"> {{-- Menggunakan class="row" untuk tata letak grid --}}
+
                 {{-- Menampilkan ID Dokumen --}}
                 <dt class="col-sm-3">ID Dokumen</dt>
                 <dd class="col-sm-9">{{ $dokumen->id ?? '-' }}</dd>
@@ -38,7 +43,7 @@
 
                 {{-- Menampilkan Nomor Kelompok --}}
                 <dt class="col-sm-3">Nomor Kelompok</dt>
-                <dd class="col-sm-9">{{ $dokumen->nomor_kelompok ?? '-' }}</dd>
+                <dd class="col-sm-9">{{ $dokumen->nomor_kelompok ?? '-' }}</dd> {{-- Menggunakan nama field dari model Dokumen --}}
 
                 {{-- Menampilkan Link File Dokumen --}}
                 <dt class="col-sm-3">File Dokumen</dt>
@@ -58,24 +63,23 @@
                  {{-- Menampilkan Tanggal Submit (created_at) --}}
                  <dt class="col-sm-3">Tanggal Submit</dt>
                  {{-- Menggunakan format tanggal dan waktu. Memberi nilai default jika created_at null. --}}
-                 <dd class="col-sm-9">{{ $dokumen->created_at ? $dokumen->created_at->format('d M Y H:i:s') : '-' }}</dd>
+                 {{-- Menggunakan created_at yang umum terisi otomatis oleh Eloquent --}}
+                 <dd class="col-sm-9">{{ $dokumen->created_at ? $dokumen->created_at->format('d M Y H:i:s') : '-' }}</dd> {{-- Menggunakan created_at dari model Dokumen --}}
             </dl>
         </div>
         {{-- Footer card dengan tombol aksi --}}
         <div class="card-footer">
              {{-- Tombol kembali ke halaman index riwayat dokumen --}}
              {{-- Menggunakan route dokumen.index --}}
-             <a href="{{ route('dokumen.index') }}" class="btn btn-secondary">Kembali ke Riwayat</a>
+             <a href="{{ route('dokumen.index') }}" class="btn btn-secondary me-2">Kembali ke Riwayat</a> {{-- Menambahkan margin kanan (me-2) --}}
 
              {{-- Tombol Edit --}}
              {{-- Menggunakan route dokumen.edit dan melewatkan objek $dokumen --}}
-             {{-- Kode ini sudah benar. Jika error parameter {dokuman} masih muncul, itu karena DEFINISI ROUTE yang salah (bukan di sini). --}}
-             <a href="{{ route('dokumen.edit', $dokumen) }}" class="btn btn-warning">Edit</a>
+             <a href="{{ route('dokumen.edit', $dokumen) }}" class="btn btn-warning me-2">Edit</a> {{-- Menambahkan margin kanan (me-2) --}}
 
              {{-- Form Delete --}}
              {{-- Menggunakan route dokumen.destroy dan melewatkan ID dokumen --}}
              {{-- Menggunakan method POST dengan spoofing DELETE, dan konfirmasi JS. --}}
-             {{-- Kode ini juga sudah standar dan benar. --}}
              <form action="{{ route('dokumen.destroy', $dokumen->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus dokumen ini?');">
                 @csrf {{-- Token CSRF untuk keamanan --}}
                 @method('DELETE') {{-- Mengoverride method POST menjadi DELETE --}}
