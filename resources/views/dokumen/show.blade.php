@@ -48,12 +48,12 @@
                 {{-- Menampilkan Link File Dokumen --}}
                 <dt class="col-sm-3">File Dokumen</dt>
                 <dd class="col-sm-9">
-                    @if ($dokumen->dokumen) {{-- Cek apakah ada path dokumen tersimpan --}}
+                    @if ($dokuman->dokumen) {{-- Cek apakah ada path dokumen tersimpan --}}
                         {{-- Menggunakan Storage::url() untuk mendapatkan URL publik file --}}
                         {{-- Pastikan Anda sudah menjalankan 'php artisan storage:link' agar symlink 'public/storage' terbuat --}}
-                        <a href="{{ Storage::url($dokumen->dokumen) }}" target="_blank">
+                        <a href="{{ Storage::url($dokuman->dokumen) }}" target="_blank">
                             {{-- Menampilkan hanya nama file dari path lengkap --}}
-                            {{ basename($dokumen->dokumen) }}
+                            {{ basename($dokuman->dokumen) }}
                         </a>
                     @else
                         - Belum ada file -
@@ -64,7 +64,7 @@
                  <dt class="col-sm-3">Tanggal Submit</dt>
                  {{-- Menggunakan format tanggal dan waktu. Memberi nilai default jika created_at null. --}}
                  {{-- Menggunakan created_at yang umum terisi otomatis oleh Eloquent --}}
-                 <dd class="col-sm-9">{{ $dokumen->created_at ? $dokumen->created_at->format('d M Y H:i:s') : '-' }}</dd> {{-- Menggunakan created_at dari model Dokumen --}}
+                 <dd class="col-sm-9">{{ $dokuman->created_at ? $dokuman->created_at->format('d M Y H:i:s') : '-' }}</dd> {{-- Menggunakan created_at dari model Dokumen --}}
             </dl>
         </div>
         {{-- Footer card dengan tombol aksi --}}
@@ -75,12 +75,12 @@
 
              {{-- Tombol Edit --}}
              {{-- Menggunakan route dokumen.edit dan melewatkan objek $dokumen --}}
-             <a href="{{ route('dokumen.edit', $dokumen) }}" class="btn btn-warning me-2">Edit</a> {{-- Menambahkan margin kanan (me-2) --}}
+             <a href="{{ route('dokumen.edit', ['dokuman' => $dokuman]) }}" class="btn btn-warning me-2">Edit</a>
 
              {{-- Form Delete --}}
              {{-- Menggunakan route dokumen.destroy dan melewatkan ID dokumen --}}
              {{-- Menggunakan method POST dengan spoofing DELETE, dan konfirmasi JS. --}}
-             <form action="{{ route('dokumen.destroy', $dokumen->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus dokumen ini?');">
+             <form action="{{ route('dokumen.destroy', $dokuman->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus dokumen ini?');">
                 @csrf {{-- Token CSRF untuk keamanan --}}
                 @method('DELETE') {{-- Mengoverride method POST menjadi DELETE --}}
                 <button type="submit" class="btn btn-danger">Hapus</button>

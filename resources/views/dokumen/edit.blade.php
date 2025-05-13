@@ -14,7 +14,7 @@
     <h3 class="mb-4 text-gray-800">Edit Dokumen</h3>
 
     {{-- Form Update Dokumen --}}
-    <form action="{{ route('dokumen.update', $dokumen->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('dokumen.update', $dokuman->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -25,7 +25,7 @@
                 {{-- Input Nama --}}
                 <div class="mb-3">
                     <label for="nama" class="form-label">Nama</label>
-                    <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ old('nama', $dokumen->nama) }}" required>
+                    <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ old('nama', $dokuman->nama) }}" required>
                      @error('nama')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -34,7 +34,7 @@
                 {{-- Input Program Studi --}}
                 <div class="mb-3">
                     <label for="prodi" class="form-label">Program Studi</label>
-                    <input type="text" class="form-control @error('prodi') is-invalid @enderror" id="prodi" name="prodi" value="{{ old('prodi', $dokumen->prodi) }}" required>
+                    <input type="text" class="form-control @error('prodi') is-invalid @enderror" id="prodi" name="prodi" value="{{ old('prodi', $dokuman->prodi) }}" required>
                      @error('prodi')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -44,7 +44,7 @@
                 <div class="mb-3">
                     <label for="nomor_kelompok" class="form-label">Nomor Kelompok</label>
                     {{-- Menggunakan old() untuk mempertahankan nilai jika validasi gagal --}}
-                    <input type="text" class="form-control @error('nomor_kelompok') is-invalid @enderror" id="nomor_kelompok" name="nomor_kelompok" value="{{ old('nomor_kelompok', $dokumen->nomor_kelompok) }}" required>
+                    <input type="text" class="form-control @error('nomor_kelompok') is-invalid @enderror" id="nomor_kelompok" name="nomor_kelompok" value="{{ old('nomor_kelompok', $dokuman->nomor_kelompok) }}" required>
                      @error('nomor_kelompok')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -58,8 +58,8 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                     {{-- Menampilkan nama file saat ini jika ada --}}
-                    @if($dokumen->dokumen)
-                        <small class="form-text text-muted">File saat ini: <a href="{{ Storage::url($dokumen->dokumen) }}" target="_blank">{{ basename($dokumen->dokumen) }}</a></small>
+                    @if($dokuman->dokumen)
+                        <small class="form-text text-muted">File saat ini: <a href="{{ Storage::url($dokuman->dokumen) }}" target="_blank">{{ basename($dokuman->dokumen) }}</a></small>
                     @else
                          <small class="form-text text-muted">Belum ada file dokumen terunggah.</small>
                     @endif

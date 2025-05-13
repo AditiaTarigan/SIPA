@@ -149,7 +149,13 @@ Route::middleware(['auth'])->group(function () {
     // Ini mencakup routes: dokumen.index, dokumen.create, dokumen.store,
     // dokumen.show, dokumen.edit, dokumen.update, dokumen.destroy
     // Parameter yang digunakan oleh resource ini adalah {dokumen} (dengan 'e')
-    Route::resource('dokumen', DokumenController::class); // <-- DEFINISI YANG BENAR
+    Route::get('/dokumen', [DokumenController::class, 'index'])->name('dokumen.index'); // Menampilkan daftar dokumen
+Route::get('/dokumen/create', [DokumenController::class, 'create'])->name('dokumen.create'); // Menampilkan form untuk membuat dokumen baru
+Route::post('/dokumen', [DokumenController::class, 'store'])->name('dokumen.store'); // Menyimpan dokumen baru
+Route::get('/dokumen/{dokuman}', [DokumenController::class, 'show'])->name('dokumen.show'); // Menampilkan detail dokumen spesifik
+Route::get('/dokumen/{dokuman}/edit', [DokumenController::class, 'edit'])->name('dokumen.edit'); // Menampilkan form untuk mengedit dokumen
+Route::put('/dokumen/{dokuman}', [DokumenController::class, 'update'])->name('dokumen.update'); // Memperbarui dokumen
+Route::delete('/dokumen/{dokuman}', [DokumenController::class, 'destroy'])->name('dokumen.destroy'); // Menghapus dokumen
 
     // Route Resource standar untuk CRUD Request Judul
     Route::resource('request-judul', RequestJudulController::class);

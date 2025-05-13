@@ -71,7 +71,7 @@
                             <td class="text-center align-middle" style="white-space: nowrap;">
                                 {{-- Tombol Lihat: Menggunakan route dokumen.show --}}
                                 {{-- Ini memanggil metode show di DokumenController --}}
-                                <a href="{{ route('dokumen.show', $dokumen->id) }}" class="btn btn-sm btn-info mb-1" title="Lihat">
+                                <a href="{{ route('dokumen.show', $dokumen->id) }}" class="btn btn-sm btn-info mb-1" title="Se">
                                     Detail
                                 </a>
                                 {{-- Tombol Edit: Menggunakan route dokumen.edit --}}
